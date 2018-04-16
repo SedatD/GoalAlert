@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alerm_set_up">Alarm kuruldu</string>
+    <string name="alerts"><b>ALARMLAR</b></string>
+    <string name="any_time">Herhangi bir zaman</string>
+    <string name="away_win">Dep Önde</string>
+    <string name="both_teams_scored">KG Var</string>
+    <string name="btts_no">KG Yok</string>
+    <string name="btts_yes">KG Var</string>
+    <string name="choose">Seçiniz</string>
+    <string name="close">Kapat</string>
+    <string name="draw">Berabere</string>
+    <string name="failed">Başarısız</string>
+    <string name="finished_15">1,5 Alt Bitti</string>
+    <string name="finished_25">2,5 Alt Bitti</string>
+    <string name="finished_35">3,5 Alt Bitti</string>
+    <string name="finished_45">4,5 Alt Bitti</string>
+    <string name="full_time">Maç Sonu</string>
+    <string name="half_time">İlk Yarı</string>
+    <string name="home_win">Ev Önde</string>
+    <string name="it_is_15">1,5 Alt</string>
+    <string name="it_is_25">2,5 Alt</string>
+    <string name="it_is_35">3,5 Alt</string>
+    <string name="it_is_45">4,5 Alt</string>
+    <string name="it_is_over_eksi05">0,5 Alt !</string>
+    <string name="it_is_over_eksi15">1,5 Alt !</string>
+    <string name="it_is_over_eksi25">2,5 Alt !</string>
+    <string name="it_is_over_eksi35">3,5 Alt !</string>
+    <string name="it_is_over_eksi45">4,5 Alt !</string>
+    <string name="it_is_over_eksi55">5,5 Alt !</string>
+    <string name="its_over_05">0,5 Üst !</string>
+    <string name="its_over_15">1,5 Üst !</string>
+    <string name="its_over_25">2,5 Üst !</string>
+    <string name="its_over_35">3,5 Üst !</string>
+    <string name="its_over_45">4,5 Üst !</string>
+    <string name="live"><b>CANLI</b></string>
+    <string name="nextmatch"><b>Gelecek Maçlar</b></string>
+    <string name="no_alarm_setted">Canlı maçlar sekmesinden yeni alarm kurabilirsiniz</string>
+    <string name="no_goal">Gol Yok</string>
+    <string name="no_match_result">Şuan gösterilecek bir sonuç yok</string>
+    <string name="no_math_next">Şuan gösterilecek bir fikstür yok</string>
+    <string name="one_team_didnt_score">1 Takım Gol Atmadı</string>
+    <string name="please_choose">Lütfen Seçiniz</string>
+    <string name="poor_match">Golsüz Maç</string>
+    <string name="result"><b>SONUÇLAR</b></string>
+    <string name="score">SKOR</string>
+    <string name="score_info">Skor Bilgisi</string>
+    <string name="search">Arama</string>
+    <string name="set_alert">Alarm Kur</string>
+    <string name="success">Başarılı</string>
+    <string name="there_is_a_scorer">Maçta Gol Var</string>
+    <string name="title_activity_settings">AYARLAR</string>
+    <string name="win_to_nil">0\'a karşı</string>
+    <string name="your_alert">"Alarmınız : "</string>
+    <string name="your_alert_any_time">Alarmınız : Herhangi bir zaman </string>
+    <string name="your_alert_choose">Alarmınız : Seçiniz </string>
+    <string name="your_alert_full_time">Alarmınız : Maç Sonu </string>
+    <string name="your_alert_half_time">Alarmınız : İlk Yarı </string>
+    <string name="its">Maç </string>
+    <string name="no_goal_yet">Henüz Gol Yok</string>
+    <string name="already_goal">Yeni Gol Oldu</string>
+    <string name="action_settings"><font color='blue'>Ayarlar</font></string>
+    <string name="kullanici_sozlesmesi"><font color='blue'>Kullanıcı Sözleşmesi</font></string>
+    <string name="bize_ulasin"><font color='blue'>Bize Ulaşın</font></string>
+    <string name="share"><font color='blue'>Paylaş</font></string>
+    <string name="pref_title_vibrate">Titreşim</string>
+    <string name="show_tutorials"><font color='blue'>Tanıtımı Göster</font></string>
+    <string name="goal_message">Gol Mesajları</string>
+    <string name="net_connection">Lütfen internet bağlantınızı kontrol ediniz.</string>
+    <string name="no_match_live">Şuan gösterilecek canlı maç yok</string>
+    <string name="predictions">Tahminler</string>
+    <string name="goal12">1-2 Gol</string>
+    <string name="set_multi">Çoklu alarm kur</string>
+    <string name="set_multi_long">Şu anda canlıda olan maçlara alarm kur</string>
+</resources>

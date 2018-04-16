@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name" translatable="false">Goal Alert</string>
+    <string name="title_activity_settings">SETTINGS</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="login_screen_text" translatable="false"><b>GOAL</b> <i>ALERT</i></string>
+    <string name="live"><b>LIVE</b></string>
+    <string name="result"><b>RESULT</b></string>
+    <string name="nextmatch"><b>NEXT MATCH</b></string>
+    <string name="alerts"><b>ALERTS</b></string>
+    <string name="set_alert">Set Alert</string>
+    <string name="your_alert">Your Alert : </string>
+    <string name="no_goal">No Goal</string>
+    <string name="draw">Draw</string>
+    <string name="win_to_nil">Wın to nıl</string>
+    <string name="home_win">Home Wın</string>
+    <string name="away_win">Away Wın</string>
+    <string name="search">Search</string>
+    <string name="no_alarm_setted">You can set a new alarm on Live Page</string>
+    <string name="your_alert_choose">Your Alert : Choose </string>
+    <string name="your_alert_any_time">Your Alert : Any Time </string>
+    <string name="your_alert_half_time">Your Alert : Half Time </string>
+    <string name="your_alert_full_time">Your Alert : Full Time </string>
+    <string name="btts_yes">BTTS YES</string>
+    <string name="btts_no">BTTS NO</string>
+    <string name="score">SCORE</string>
+    <string name="half_time">Half Time</string>
+    <string name="full_time">Full Time</string>
+    <string name="choose">Choose</string>
+    <string name="any_time">Any Time</string>
+    <string name="close">Close</string>
+    <string name="failed">Failed</string>
+    <string name="its_over_05">It\'s over 0,5 !</string>
+    <string name="its_over_15">It\'s over 1,5 !</string>
+    <string name="its_over_25">It\'s over 2,5 !</string>
+    <string name="its_over_35">It\'s over 3,5 !</string>
+    <string name="its_over_45">It\'s over 4,5 !</string>
+    <string name="poor_match">Poor Match</string>
+    <string name="finished_15">Finished -1,5</string>
+    <string name="finished_25">Finished -2,5</string>
+    <string name="finished_35">Finished -3,5</string>
+    <string name="finished_45">Finished -4,5</string>
+    <string name="both_teams_scored">Both Teams Scored</string>
+    <string name="one_team_didnt_score">One Team Didn\'t Score</string>
+    <string name="score_info">Score Info</string>
+    <string name="success">Success</string>
+    <string name="there_is_a_scorer">There\'s a Scorer</string>
+    <string name="it_is_over_eksi05">It\'s -0,5 !</string>
+    <string name="it_is_over_eksi15">It\'s -1,5 !</string>
+    <string name="it_is_over_eksi25">It\'s -2,5 !</string>
+    <string name="it_is_over_eksi35">It\'s -3,5 !</string>
+    <string name="it_is_over_eksi45">It\'s -4,5 !</string>
+    <string name="it_is_over_eksi55">It\'s -5,5 !</string>
+    <string name="it_is_15">It\'s -1,5</string>
+    <string name="it_is_25">It\'s -2,5</string>
+    <string name="it_is_35">It\'s -3,5</string>
+    <string name="it_is_45">It\'s -4,5</string>
+    <string name="its">It\'s</string>
+    <string name="faq" translatable="false">Goal Alert Privacy Notice
+        \n\nThis privacy notice discloses the privacy practices for GOAL ALERT application. This privacy notice applies solely to information collected by this application. It will notify you of the following:
+        \n\n1. What personally identifiable information is collected from you through the application, how it is used and with whom it may be shared.
+        \n\n2. What choices are available to you regarding the use of your data.
+        \n\n3. The security procedures in place to protect the misuse of your information.
+        \n\n4. How you can correct any inaccuracies in the information.
+        \n\nWe are the sole owners of the information collected on this application. We only have access to/collect information that you voluntarily give us via email or other direct contact from you. We will use your information to respond to you, regarding the reason you contacted us. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request, e.g. to ship an order.
+        \n\nUnless you ask us not to, we may contact you via email in the future to tell you about specials, new products or services, or changes to this privacy policy.
+        \n\nYou may opt out of any future contacts from us at any time. You can do the following at any time by contacting us via the email address or phone number given on our application:
+        \n\n• See what data we have about you, if any.
+        \n• Change/correct any data we have about you.
+        \n• Have us delete any data we have about you.
+        \n• Express any concern you have about our use of your data.
+        \n\nWe take precautions to protect your information. When you submit sensitive information via the application, your information is protected both online and offline. Wherever we collect sensitive information (such as credit card data), that information is encrypted and transmitted to us in a secure way. You can verify this by looking for a lock icon in the address bar and looking for "https" at the beginning of the address of the Web page.
+        \n\nWhile we use encryption to protect sensitive information transmitted online, we also protect your information offline. Only employees who need the information to perform a specific job (for example, billing or customer service) are granted access to personally identifiable information. The computers/servers in which we store personally identifiable information are kept in a secure environment.
+        \n\nIn order to use this application, a user may be asked to complete a registration form. During registration a user is required to give certain information (such as name and email address). This information is used to contact you about the products/services on our application in which you have expressed interest. At your option, you may also provide demographic information (such as gender or age) about yourself.
+        \n\nWe request information from you on our order form. To buy any service from us, you must provide contact information (like name and shipping address) and financial information (like credit card number, expiration date). This information is used for billing purposes and to fill your orders. If we have trouble processing an order, we\'ll use this information to contact you.
+        \n\nWe use "cookies" on this application. A cookie is a piece of data stored on an application visitor\'s hard drive to help us improve your access to our application and identify repeat visitors to our application. For instance, when we use a cookie to identify you, you would not have to log in a password more than once, thereby saving time while on our application. Cookies can also enable us to track and target the interests of our users to enhance the experience on our application. Usage of a cookie is in no way linked to any personally identifiable information on our application.
+        \n\nSome of our business partners may use cookies on our application (for example, advertisers). However, we have no access to or control over these cookies.
+        \n\nWe share aggregated demographic information with our partners and advertisers. This is not linked to any personal information that can identify any individual person.
+        \n\nWe may use third party companies to serve orders, and a credit card processing company to bill users for goods and services. These companies do not retain, share, store or use personally identifiable information for any secondary purposes beyond filling your order.
+        \n\nWe partner with another party to provide specific services. When the user signs up for these services, we will share names, or other contact information that is necessary for the third party to provide these services. These parties are not allowed to use personally identifiable information except for the purpose of providing these services.
+        \n\nThis application contains links to other websites or applications. Please be aware that we are not responsible for the content or privacy practices of such other sites or applications. We encourage our users to be aware when they leave our application and to read the privacy statements of any other websites or applications that collects personally identifiable information.
+        \n\nFrom time-to-time our application requests information via surveys or contests. Participation in these surveys or contests is completely voluntary and you may choose whether or not to participate and therefore disclose this information. Information requested may include contact information (such as name and shipping address), and demographic information (such as zip code, age level). Contact information will be used to notify the winners and award prizes. Survey information will be used for purposes of monitoring or improving the use and satisfaction of this application.
+        \n\nIf you feel that we are not abiding by this privacy policy, you should contact us immediately via\nsupport@vavien.agency</string>
+    <string name="contact" translatable="false">
+        GOAL ALERT
+        \n\nEmail : support@vavien.agency
+    </string>
+    <string name="please_choose">Please choose</string>
+    <string name="alerm_set_up">Alarm set up</string>
+    <string name="no_match_result">No results at the moment</string>
+    <string name="no_match_live">No live matches at the moment</string>
+    <string name="no_math_next">No next matches at the moment</string>
+    <string name="kullanici_sozlesmesi"><font color='blue'>User Agreement</font></string>
+    <string name="bize_ulasin"><font color='blue'>Contact Us</font></string>
+    <string name="share"><font color='blue'>Share</font></string>
+    <string name="action_settings"><font color='blue'>Settings</font></string>
+    <string name="no_goal_yet">No Goal Yet</string>
+    <string name="already_goal">Already Goal</string>
+    <string name="show_tutorials"><font color='blue'>Show Tutorials</font></string>
+    <string name="goal_message">Goal Message</string>
+    <string name="net_connection">Please check your internet connection.</string>
+    <string name="predictions">Predictions</string>
+    <string name="goal12">1-2 Goal</string>
+    <string name="set_multi">Set multiple alerts</string>
+    <string name="set_multi_long">Set alerts to current live matches</string>
+</resources>

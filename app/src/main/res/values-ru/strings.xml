@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings"><font color="blue">уведомление</font></string>
+    <string name="alerm_set_up">Настройка будильника</string>
+    <string name="alerts"><b>УВЕДОМЛЕНИЯ</b></string>
+    <string name="already_goal">Гол забит</string>
+    <string name="any_time">ЛЮБОЕ ВРЕМЯ</string>
+    <string name="away_win">ПОБЕДА НА ВЫЕЗДЕ</string>
+    <string name="bize_ulasin"><font color="blue">СВЯЖИТЕСЬ С НАМИ</font></string>
+    <string name="both_teams_scored">Обе команды забили</string>
+    <string name="btts_no">ВГ нет</string>
+    <string name="btts_yes">ВГ есть</string>
+    <string name="choose">ВЫБЕРИТЕ</string>
+    <string name="close">Закрыть</string>
+    <string name="draw">НИЧЬЯ</string>
+    <string name="failed">не смогли</string>
+    <string name="finished_15">Меньше 1,5</string>
+    <string name="finished_25">Меньше 2,5</string>
+    <string name="finished_35">Меньше 3,5</string>
+    <string name="finished_45">Меньше 4,5</string>
+    <string name="full_time">КОНЕЦ МАТЧА</string>
+    <string name="goal_message">СООБЩЕНИЯ О ГОЛАХ</string>
+    <string name="half_time">ПЕРВЫЙ ТАЙМ</string>
+    <string name="home_win">ДОМАШНЯЯ ПОБЕДА</string>
+    <string name="it_is_15">Меньше 1,5</string>
+    <string name="it_is_25">Меньше 2,5</string>
+    <string name="it_is_35">Меньше 3,5</string>
+    <string name="it_is_45">Меньше 4,5</string>
+    <string name="it_is_over_eksi05">Меньше 0,5 !</string>
+    <string name="it_is_over_eksi15">Меньше 2,5 !</string>
+    <string name="it_is_over_eksi25">Меньше 2,5 !</string>
+    <string name="it_is_over_eksi35">Меньше 3,5 !</string>
+    <string name="it_is_over_eksi45">Меньше 4,5 !</string>
+    <string name="it_is_over_eksi55">Меньше 5,5 !</string>
+    <string name="its">его</string>
+    <string name="its_over_05">Больше 0,5 !</string>
+    <string name="its_over_15">Больше 1,5 !</string>
+    <string name="its_over_25">Больше 2,5 !</string>
+    <string name="its_over_35">Больше 3,5 !</string>
+    <string name="its_over_45">Больше 4,5 !</string>
+    <string name="kullanici_sozlesmesi"><font color="blue">ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</font></string>
+    <string name="live"><b>В ПРЯМОМ ЭФИРЕ</b></string>
+    <string name="net_connection">Пожалуйста, проверьте подключение к интернету.</string>
+    <string name="nextmatch"><b>ПРЕДСТОЯЩИЕ МАТЧИ</b></string>
+    <string name="no_alarm_setted">НА ВКЛАДКЕ МАТЧЕЙ В ПРЯМОМ ЭФИРЕ ВЫ МОЖЕТЕ УСТАНОВИТЬ НОВОЕ УВЕДОМЛЕНИЕ</string>
+    <string name="no_goal">ГОЛОВ НЕТ</string>
+    <string name="no_goal_yet">Голов пока нет</string>
+    <string name="no_match_live">В НАСТОЯЩИЙ МОМЕНТ НЕТ МАТЧЕЙ В ПРЯМОМ ЭФИРЕ</string>
+    <string name="no_match_result">Нет результатов на данный момент</string>
+    <string name="no_math_next">Нет следующих матчей в данный момент</string>
+    <string name="one_team_didnt_score">Взаимных голов не было</string>
+    <string name="please_choose">ВЫБЕРИТЕ</string>
+    <string name="poor_match">В матче не забито голов</string>
+    <string name="pref_title_vibrate">ВИБРАЦИЯ</string>
+    <string name="result"><b>РЕЗУЛЬТАТЫ</b></string>
+    <string name="score">Счет</string>
+    <string name="score_info">Счет</string>
+    <string name="search">поиск</string>
+    <string name="set_alert">УСТАНОВИТЬ УВЕДОМЛЕНИЕ</string>
+    <string name="share"><font color="blue">ПОДЕЛИТЬСЯ</font></string>
+    <string name="show_tutorials"><font color="blue">ПОКАЗАТЬ РУКОВОДСТВО ПОЛЬЗОВАТЕЛЯ</font></string>
+    <string name="success">успех</string>
+    <string name="there_is_a_scorer">В матче забиты голы</string>
+    <string name="title_activity_settings">УВЕДОМЛЕНИЕ</string>
+    <string name="win_to_nil">ПОБЕДА ВСУХУЮ</string>
+    <string name="your_alert">ВАШИ УВЕДОМЛЕНИЯ :</string>
+    <string name="your_alert_any_time">ВАШИ УВЕДОМЛЕНИЯ : ANYTIME</string>
+    <string name="your_alert_choose">ВАШИ УВЕДОМЛЕНИЯ : ВЫБЕРИТЕ</string>
+    <string name="your_alert_full_time">ВАШИ УВЕДОМЛЕНИЯ : FULL TIME</string>
+    <string name="your_alert_half_time">ВАШИ УВЕДОМЛЕНИЯ : ПЕРВЫЙ ТАЙМ</string>
+    <string name="predictions">ПРОГНОЗЫ</string>
+    <string name="goal12">1-2 гол</string>
+    <string name="set_multi">Установить мульти-уведомление</string>
+    <string name="set_multi_long">Установить уведомление для матчей, идущих сейчас в прямом эфире</string>
+</resources>

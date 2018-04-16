@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings"><font color="blue">Parametres</font></string>
+    <string name="alerm_set_up">Alarme configurée</string>
+    <string name="alerts"><b>ALERTES</b></string>
+    <string name="already_goal">Déjà un but</string>
+    <string name="any_time">N\'IMPORTE QUAND</string>
+    <string name="away_win">GAGNE A L\'EXTERIEUR</string>
+    <string name="bize_ulasin"><font color="blue">Nous Contacter</font></string>
+    <string name="both_teams_scored">Les deux équipes ont marqué</string>
+    <string name="btts_no">LDEM NON</string>
+    <string name="btts_yes">LDEM OUI</string>
+    <string name="choose">Selectionner</string>
+    <string name="close">Fermer</string>
+    <string name="draw">EX-AEQUO</string>
+    <string name="failed">Échoué</string>
+    <string name="finished_15">Terminé -1,5</string>
+    <string name="finished_25">Terminé -2,5</string>
+    <string name="finished_35">Terminé -3,5</string>
+    <string name="finished_45">Terminé -4,5</string>
+    <string name="full_time">FIN DE MATCH</string>
+    <string name="goal_message">MESSAGE DE BUT</string>
+    <string name="half_time">MI TEMPS</string>
+    <string name="home_win">GAGNE A DOMICILE</string>
+    <string name="it_is_15">C\'est -1,5</string>
+    <string name="it_is_25">C\'est -2,5</string>
+    <string name="it_is_35">C\'est -3,5</string>
+    <string name="it_is_45">C\'est -4,5</string>
+    <string name="it_is_over_eksi05">C\'est -0,5 !</string>
+    <string name="it_is_over_eksi15">C\'est -1,5 !</string>
+    <string name="it_is_over_eksi25">C\'est -2,5 !</string>
+    <string name="it_is_over_eksi35">C\'est -3,5 !</string>
+    <string name="it_is_over_eksi45">C\'est -4,5 !</string>
+    <string name="it_is_over_eksi55">C\'est -5,5 !</string>
+    <string name="its">C\'est</string>
+    <string name="its_over_05">C\'est plus 0,5 !</string>
+    <string name="its_over_15">C\'est plus 1,5 !</string>
+    <string name="its_over_25">C\'est plus 2,5 !</string>
+    <string name="its_over_35">C\'est plus 3,5 !</string>
+    <string name="its_over_45">C\'est plus 4,5 !</string>
+    <string name="kullanici_sozlesmesi"><font color="blue">Accord De L\'utilisateur</font></string>
+    <string name="live"><b>DIRECT</b></string>
+    <string name="net_connection">S\'il vous plait, vérifiez votre connexion internet.</string>
+    <string name="nextmatch"><b>PROCHAIN MATCH</b></string>
+    <string name="no_alarm_setted">VOUS POUVEZ DEFINIR UNE NOUVELLE ALARME SUR LA PAGE EN DIRECT</string>
+    <string name="no_goal">Pas De But</string>
+    <string name="no_goal_yet">Pas encore de but</string>
+    <string name="no_match_live">PAS DE MATCH EN DIRECT ACTUELLEMENT</string>
+    <string name="no_match_result">Aucun résultat pour le moment</string>
+    <string name="no_math_next">Aucun prochain match pour le moment</string>
+    <string name="one_team_didnt_score">Une équipe n\'a pas marqué</string>
+    <string name="please_choose">Selectionner</string>
+    <string name="poor_match">Match nul</string>
+    <string name="pref_title_vibrate">Vibrer</string>
+    <string name="result"><b>RESULTATS</b></string>
+    <string name="score">SCORE</string>
+    <string name="score_info">Info Score</string>
+    <string name="search">Chercher</string>
+    <string name="set_alert">REGLER L\'ALERTE</string>
+    <string name="share"><font color="blue">Partager</font></string>
+    <string name="show_tutorials"><font color="blue">Montrer Le Tutoriel</font></string>
+    <string name="success">Succès</string>
+    <string name="there_is_a_scorer">Il y a un but durant le match</string>
+    <string name="title_activity_settings">PARAMETRES</string>
+    <string name="win_to_nil">A ZERO</string>
+    <string name="your_alert">Votre Alerte :</string>
+    <string name="your_alert_any_time">Votre Alerte : N\'IMPORTE QUAND</string>
+    <string name="your_alert_choose">Votre Alerte : SELECTIONNER</string>
+    <string name="your_alert_full_time">Votre Alerte : FIN DE MATCH</string>
+    <string name="your_alert_half_time">Votre Alerte : MI TEMPS</string>
+    <string name="predictions">PRONOSTICS</string>
+    <string name="goal12">1-2 But</string>
+    <string name="set_multi">Définir des alertes multiples</string>
+    <string name="set_multi_long">Définir des alertes pour les matchs en cours</string>
+</resources>

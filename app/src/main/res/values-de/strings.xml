@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings"><font color="blue">Einstellungen</font></string>
+    <string name="alerm_set_up">Alarm Einstellen</string>
+    <string name="alerts"><b>ALARME</b></string>
+    <string name="already_goal">Es gibt Tore</string>
+    <string name="any_time">Jederzeit</string>
+    <string name="away_win">Gastmannschaft Liegt Vorn</string>
+    <string name="bize_ulasin"><font color="blue">KONTAKTİEREN SİE UNS</font></string>
+    <string name="both_teams_scored">Beide Mannschaften Haben Tor Geschossen</string>
+    <string name="btts_yes">BTTS JA</string>
+    <string name="btts_no">BTTS NEİN</string>
+    <string name="choose">Waehlen</string>
+    <string name="close">schließen</string>
+    <string name="draw">Gleichstand</string>
+    <string name="failed">Gescheitert</string>
+    <string name="finished_15">Es ist unter 1,5</string>
+    <string name="finished_25">Es ist unter 2,5</string>
+    <string name="finished_35">Es ist unter 3,5</string>
+    <string name="finished_45">Es ist unter 4,5</string>
+    <string name="full_time">Spielende</string>
+    <string name="goal_message">Tor Meldungen</string>
+    <string name="half_time">Erste Halbzeit</string>
+    <string name="home_win">Gastgeber Lıegt Vorn</string>
+    <string name="it_is_15">Es ist unter 1,5</string>
+    <string name="it_is_25">Es ist unter 2,5</string>
+    <string name="it_is_35">Es ist unter 3,5</string>
+    <string name="it_is_45">Es ist unter 4,5</string>
+    <string name="it_is_over_eksi05">Es ist unter 0,5 !</string>
+    <string name="it_is_over_eksi15">Es ist unter 1,5 !</string>
+    <string name="it_is_over_eksi25">Es ist unter 2,5 !</string>
+    <string name="it_is_over_eksi35">Es ist unter 3,5 !</string>
+    <string name="it_is_over_eksi45">Es ist unter 4,5 !</string>
+    <string name="it_is_over_eksi55">Es ist unter 5,5 !</string>
+    <string name="its">Es ist</string>
+    <string name="its_over_05">Es ist über 0,5 !</string>
+    <string name="its_over_15">Es ist über 1,5 !</string>
+    <string name="its_over_25">Es ist über 2,5 !</string>
+    <string name="its_over_35">Es ist über 3,5 !</string>
+    <string name="its_over_45">Es ist über 4,5 !</string>
+    <string name="kullanici_sozlesmesi"><font color="blue">Benutzervereinabrung</font></string>
+    <string name="live"><b>LIVE</b></string>
+    <string name="net_connection">Bitte überprüfe deine Internetverbindung.</string>
+    <string name="nextmatch"><b>NAECHSTE SPİELE</b></string>
+    <string name="no_alarm_setted">SİE KÖNNEN VON DER LİVE SPİEL SEİTE AUS NEUE ALARME EİNSTELLEN</string>
+    <string name="no_goal">Kein Tor</string>
+    <string name="no_goal_yet">Noch kein Tor</string>
+    <string name="no_match_live">Derzeit Gibt Ee Keine Livespiele</string>
+    <string name="no_match_result">Keine Ergebnisse im Moment</string>
+    <string name="no_math_next">Keine weiteren Spiele im Moment</string>
+    <string name="one_team_didnt_score">Eine Mannschaft hat kein Tor geschossen</string>
+    <string name="please_choose">Waehlen</string>
+    <string name="poor_match">Torloses Spiel</string>
+    <string name="pref_title_vibrate">Vibrieren</string>
+    <string name="result"><b>ERGEBNIS</b></string>
+    <string name="score">ERGEBNIS</string>
+    <string name="score_info">Ergebnis</string>
+    <string name="search">Suche</string>
+    <string name="set_alert">Alarm Einstellen</string>
+    <string name="share"><font color="blue">Teilen</font></string>
+    <string name="show_tutorials"><font color="blue">Zeig Tutorial</font></string>
+    <string name="success">Erfolg</string>
+    <string name="there_is_a_scorer">Es gibt Tore im Spiel</string>
+    <string name="title_activity_settings">EİNSTELLUNGEN</string>
+    <string name="win_to_nil">Gegen 0</string>
+    <string name="your_alert">Ihr Alarm :</string>
+    <string name="your_alert_any_time">Ihr Alarm : Jederzeit</string>
+    <string name="your_alert_choose">Ihr Alarm : Waehlen</string>
+    <string name="your_alert_full_time">Ihr Alarm : Spielende</string>
+    <string name="your_alert_half_time">Ihr Alarm : Erste Halbzeit</string>
+    <string name="predictions">VERMUTUNGEN</string>
+    <string name="goal12">1-2 Tor</string>
+    <string name="set_multi">Stelle mehrere Alarme ein</string>
+    <string name="set_multi_long">Stelle Alarme auf für die Live-Spiele ein</string>
+</resources>

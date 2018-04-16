@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="vavien.com.tipster.MainActivity">
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sozlesme"
+        android:orderInCategory="100"
+        android:title="@string/kullanici_sozlesmesi"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sendUs"
+        android:orderInCategory="100"
+        android:title="@string/bize_ulasin"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_share"
+        android:orderInCategory="100"
+        android:title="@string/share"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_tutorials"
+        android:orderInCategory="100"
+        android:title="@string/show_tutorials"
+        app:showAsAction="never" />
+</menu>

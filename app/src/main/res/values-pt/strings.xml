@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings"><font color="blue">Configuraçoes</font></string>
+    <string name="alerm_set_up">Configuração de alarme</string>
+    <string name="alerts"><b>ALERTAS</b></string>
+    <string name="already_goal">Já Teve Gol</string>
+    <string name="any_time">A QUALQUER MOMENTO</string>
+    <string name="away_win">VITÓRIA FORA DE CASA</string>
+    <string name="bize_ulasin"><font color="blue">Entre Em Contato</font></string>
+    <string name="both_teams_scored">Os Dois Times Marcaram</string>
+    <string name="btts_no">ODTM NÃO</string>
+    <string name="btts_yes">ODTM SIM</string>
+    <string name="choose">ESCOLHER</string>
+    <string name="close">Fechar</string>
+    <string name="draw">EMPATE</string>
+    <string name="failed">Falhou</string>
+    <string name="finished_15">Terminou -1,5</string>
+    <string name="finished_25">Terminou -2,5</string>
+    <string name="finished_35">Terminou -3,5</string>
+    <string name="finished_45">Terminou -4,5</string>
+    <string name="full_time">TEMPO INTEGRAL</string>
+    <string name="goal_message">MENSAGEM DE GOL</string>
+    <string name="half_time">INTERVALO</string>
+    <string name="home_win">VITÓRIA EM CASA</string>
+    <string name="it_is_15">Está -1,5</string>
+    <string name="it_is_25">Está -2,5</string>
+    <string name="it_is_35">Está -3,5</string>
+    <string name="it_is_45">Está -4,5</string>
+    <string name="it_is_over_eksi05">Está -0,5 !</string>
+    <string name="it_is_over_eksi15">Está -1,5 !</string>
+    <string name="it_is_over_eksi25">Está -2,5 !</string>
+    <string name="it_is_over_eksi35">Está -3,5 !</string>
+    <string name="it_is_over_eksi45">Está -4,5 !</string>
+    <string name="it_is_over_eksi55">Está -5,5 !</string>
+    <string name="its">Está</string>
+    <string name="its_over_05">Acabou 0,5 !</string>
+    <string name="its_over_15">Acabou 1,5 !</string>
+    <string name="its_over_25">Acabou 2,5 !</string>
+    <string name="its_over_35">Acabou 3,5 !</string>
+    <string name="its_over_45">Acabou 4,5 !</string>
+    <string name="kullanici_sozlesmesi"><font color="blue">Acordo Do Usuario</font></string>
+    <string name="live"><b>AO VIVO</b></string>
+    <string name="net_connection">Por favor, verifique sua conexão à internet.</string>
+    <string name="nextmatch"><b>PRÓXIMO JOGO</b></string>
+    <string name="no_alarm_setted">VOCÊ PODE CRIAR UM NOVO ALARME NA PÁGINA AO VIVO</string>
+    <string name="no_goal">Sem Gol</string>
+    <string name="no_goal_yet">Nenhum Gol Ainda</string>
+    <string name="no_match_live">NENHUM JOGO AO VIVO NO MOMENTO</string>
+    <string name="no_match_result">Nenhum resultado no momento</string>
+    <string name="no_math_next">Nenhum próximo jogo no momento</string>
+    <string name="one_team_didnt_score">Um Time Não Marcou</string>
+    <string name="please_choose">ESCOLHER</string>
+    <string name="poor_match">Jogo Fraco</string>
+    <string name="pref_title_vibrate">Vibrar</string>
+    <string name="result"><b>RESULTADOS</b></string>
+    <string name="score">PLACAR</string>
+    <string name="score_info">Informação do Placar</string>
+    <string name="search">Pesquisa</string>
+    <string name="set_alert">NOVO ALARME</string>
+    <string name="share"><font color="blue">Compartilhe</font></string>
+    <string name="show_tutorials"><font color="blue">Mostrar Tutorial</font></string>
+    <string name="success">Sucesso</string>
+    <string name="there_is_a_scorer">Há um Marcador</string>
+    <string name="title_activity_settings">CONFIGURAÇÕES</string>
+    <string name="win_to_nil">GANHAR A ZERO</string>
+    <string name="your_alert">Seus Alarmes :</string>
+    <string name="your_alert_any_time">Seus Alarmes : A QUALQUER MOMENTO</string>
+    <string name="your_alert_choose">Seus Alarmes : ESCOLHER</string>
+    <string name="your_alert_full_time">Seus Alarmes : TEMPO INTEGRAL</string>
+    <string name="your_alert_half_time">Seus Alarmes : INTERVALO</string>
+    <string name="predictions">PREVISÕES</string>
+    <string name="goal12">1-2 Gol</string>
+    <string name="set_multi">Criar vários alertas</string>
+    <string name="set_multi_long">Criar alertas para os jogos atuais</string>
+</resources>
