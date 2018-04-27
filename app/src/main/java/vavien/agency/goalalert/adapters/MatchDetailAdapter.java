@@ -44,8 +44,17 @@ public class MatchDetailAdapter extends RecyclerView.Adapter<MatchDetailAdapter.
         holder.textView_local.setText(mDataset.get(position).getLocalValue() + "");
         holder.textView_visitor.setText(mDataset.get(position).getVisitorValue() + "");
 
-        holder.imageView_local.getLayoutParams().width = mDataset.get(position).getVisitorValue();
-        holder.imageView_visitor.getLayoutParams().width = mDataset.get(position).getVisitorValue();
+        //holder.imageView_local.getLayoutParams().width = mDataset.get(position).getBarValue();
+        //holder.imageView_visitor.getLayoutParams().width = mDataset.get(position).getBarValue();
+
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, (1 - mDataset.get(position).getBarValue()));
+        ViewGroup.LayoutParams paramsbg = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, mDataset.get(position).getBarValue());
+
+        holder.imageView_local.setLayoutParams(params);
+        holder.imageView_visitor.setLayoutParams(params);
+
+        holder.imageView_local_bg.setLayoutParams(paramsbg);
+        holder.imageView_visitor_bg.setLayoutParams(paramsbg);
 
         holder.imageView_local.requestLayout();
         holder.imageView_visitor.requestLayout();
@@ -59,7 +68,7 @@ public class MatchDetailAdapter extends RecyclerView.Adapter<MatchDetailAdapter.
     public class DataObjectHolder extends RecyclerView.ViewHolder {
         LinearLayout linearLayout_row;
         TextView textView_stat, textView_local, textView_visitor;
-        ImageView imageView_local, imageView_visitor;
+        ImageView imageView_local, imageView_visitor, imageView_visitor_bg, imageView_local_bg;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -69,6 +78,8 @@ public class MatchDetailAdapter extends RecyclerView.Adapter<MatchDetailAdapter.
             textView_visitor = itemView.findViewById(R.id.textView_visitor);
             imageView_local = itemView.findViewById(R.id.imageView_local);
             imageView_visitor = itemView.findViewById(R.id.imageView_visitor);
+            imageView_visitor_bg = itemView.findViewById(R.id.imageView_visitor_bg);
+            imageView_local_bg = itemView.findViewById(R.id.imageView_local_bg);
             /*imageView_kabulBekleyen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

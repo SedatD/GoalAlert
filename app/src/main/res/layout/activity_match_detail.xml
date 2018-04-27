@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:background="#efefef"
+        android:background="#9E9E9E"
         android:gravity="center"
         android:text="Match Detail"
         android:textColor="#000"
@@ -100,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Refferre : Collina"
+        android:text="Referee : Collina"
         android:textColor="#000"
         android:textSize="17sp" />
 
@@ -117,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#efefef"
+        android:background="#9E9E9E"
         android:gravity="center"
         android:text="Live Stats"
         android:textColor="#000"

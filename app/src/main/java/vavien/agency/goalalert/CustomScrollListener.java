@@ -51,4 +51,5 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
             System.out.println("No Vertical Scrolled");
         }
     }
+
 }

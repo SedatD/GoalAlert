@@ -30,21 +30,17 @@ import vavien.agency.goalalert.pojoClasses.AlertsPojo;
  */
 
 public class Fragment_myAlerts extends Fragment implements View.OnClickListener {
-    private AlarmListAdapter alarmListAdapter = null;
     private DBHelper mydb;
     private TextView textViewNoAlert;
-    private List<AlertsPojo> alarms;
-    private View alertview;
     private ListView listView;
-    private ImageButton imageButton_reklam;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        alertview = inflater.inflate(R.layout.tab_myalerts, container, false);
+        View alertview = inflater.inflate(R.layout.tab_myalerts, container, false);
 
         textViewNoAlert = alertview.findViewById(R.id.textViewNoAlert);
         listView = alertview.findViewById(R.id.lw_alertTab);
-        imageButton_reklam = alertview.findViewById(R.id.imageButton_reklam);
+        ImageButton imageButton_reklam = alertview.findViewById(R.id.imageButton_reklam);
         imageButton_reklam.setOnClickListener(this);
 
         listView.invalidateViews();
@@ -58,9 +54,8 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
         return alertview;
     }
 
-
     public void ShowAlarmData() {
-        alarms = new ArrayList<AlertsPojo>();
+        List<AlertsPojo> alarms = new ArrayList<>();
         mydb = new DBHelper(getActivity().getApplicationContext());
         if (mydb.getFragmentViewList(getActivity().getApplicationContext()).size() != 0) {
             List<String> array_list = mydb.getFragmentViewList(getActivity().getApplicationContext());
@@ -80,7 +75,7 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
         if (alarms.size() == 0)
             textViewNoAlert.setVisibility(View.VISIBLE);
 
-        alarmListAdapter = new AlarmListAdapter(getActivity(), alarms, new AlarmListAdapter.onDoneClick() {
+        AlarmListAdapter alarmListAdapter = new AlarmListAdapter(getActivity(), alarms, new AlarmListAdapter.onDoneClick() {
             @Override
             public void onClick(View v, int position, int dbidd, String matchId) {
                 boolean aq = mydb.deleteMethod(dbidd);
@@ -91,7 +86,7 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
                     if (myMatchList != null && matchId != null) {
                         myMatchList.remove(matchId);
                         editor.putStringSet("myMatchList", myMatchList);
-                        Log.wtf("asdasd", "shared dan sildi - shared : " + myMatchList);
+                        Log.wtf("Frag_myAlerts", "shared dan sildi - shared : " + myMatchList);
                     }
                     editor.apply();
                 }
@@ -114,8 +109,7 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + "com.betxscore.betxscore")));
                 }
                 break;
-            default:
-                break;
         }
     }
+
 }

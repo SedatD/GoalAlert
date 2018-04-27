@@ -14,13 +14,16 @@
 
         <ImageView
             android:id="@+id/imageView_local"
-            android:layout_width="70dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight=".3"
             android:background="#FFECB3" />
 
         <ImageView
+            android:id="@+id/imageView_local_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight=".7"
             android:background="#FFB300" />
     </LinearLayout>
 
@@ -61,13 +64,16 @@
 
         <ImageView
             android:id="@+id/imageView_visitor"
-            android:layout_width="70dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight=".3"
             android:background="#FFB300" />
 
         <ImageView
+            android:id="@+id/imageView_visitor_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight=".7"
             android:background="#FFECB3" />
     </LinearLayout>
 

@@ -96,14 +96,24 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_toLeftOf="@+id/btnAlert"
-        android:layout_toStartOf="@+id/btnAlert"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@+id/btnStats"
+        android:layout_toStartOf="@+id/btnStats"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btnStats"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@+id/btnAlert"
+        android:background="@drawable/stats" />
 
     <ImageButton
         android:id="@+id/btnAlert"

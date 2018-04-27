@@ -8,11 +8,13 @@ package vavien.agency.goalalert.pojoClasses;
 public class MatchDetailPojo {
     private String statsName;
     private int localValue, visitorValue;
+    private float barValue;
 
-    public MatchDetailPojo(String statsName, int localValue, int visitorValue) {
+    public MatchDetailPojo(String statsName, int localValue, int visitorValue, float barValue) {
         this.statsName = statsName;
         this.localValue = localValue;
         this.visitorValue = visitorValue;
+        this.barValue = barValue;
     }
 
     public String getStatsName() {
@@ -25,6 +27,10 @@ public class MatchDetailPojo {
 
     public int getVisitorValue() {
         return visitorValue;
+    }
+
+    public float getBarValue() {
+        return barValue;
     }
 
 }

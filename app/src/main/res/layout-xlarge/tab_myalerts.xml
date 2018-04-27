@@ -17,7 +17,7 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <ListView
         android:id="@+id/lw_alertTab"

@@ -85,6 +85,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
                 holder.flag.setBackgroundResource(resID);
 
             holder.btnAlert.setVisibility(View.GONE);
+            holder.btnStats.setVisibility(View.GONE);
             holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.denemelig));
         } else {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -96,6 +97,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
                         holder.btnAlert.setBackgroundResource(R.drawable.bellyellow);
                 }
             }
+
             if (position % 2 == 0)
                 holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.kirlibeyaz));
 
@@ -230,7 +232,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
         TextView leagueName, local, localScore, visitorScore, visitor, minute;
         RelativeLayout rlView;
         int leagueId, matchId;
-        ImageButton btnAlert;
+        ImageButton btnAlert,btnStats;
         ImageView flag;
         TextView txtNoLiveMatch;
 
@@ -244,9 +246,11 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
             visitor = itemView.findViewById(R.id.visitor);
             minute = itemView.findViewById(R.id.minute);
             btnAlert = itemView.findViewById(R.id.btnAlert);
+            btnStats = itemView.findViewById(R.id.btnStats);
             flag = itemView.findViewById(R.id.flag);
             txtNoLiveMatch = itemView.findViewById(R.id.txtNoLiveMatch);
             btnAlert.setOnClickListener(this);
+            btnStats.setOnClickListener(this);
         }
 
         @Override

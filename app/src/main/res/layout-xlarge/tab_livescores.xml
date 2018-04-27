@@ -199,40 +199,31 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
-
         </LinearLayout>
-
     </LinearLayout>
 
-    <!--<LinearLayout
-        android:id="@+id/linearLayout_generic"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        <TextView
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_liveScores"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="@string/generic_alarms"
-            android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/imageButton_generic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@android:drawable/ic_lock_idle_alarm" />
-    </LinearLayout>-->
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_liveScores"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
-        android:scrollbars="vertical" />
 
     <TextView
         android:id="@+id/txtNoLiveMatch"

@@ -10,6 +10,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +35,6 @@ import java.util.Set;
 
 import vavien.agency.goalalert.pojoClasses.LiveScoresPojo;
 
-import static java.lang.Integer.parseInt;
-
 public class AlertActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int PERMISSION_REQUEST_CODE = 1;
     int spnPos = 0;
@@ -44,23 +43,21 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_setTime;
     private Button btn_noGoal, btn_05, btn_15, btn_25, btn_35, btn_45, btn_55, btn_e15, btn_e25, btn_e35, btn_e45, btn_e55, btn_btts_yes1, btn_btts_no1, btn_Score;
     private GradientDrawable btn_score, btts_yes, btts_no, btnno_GoalColor, btn05Color, btn15Color, btn25Color, btn35Color, btn45Color, btn55Color, btne15Color, btne25Color, btne35Color, btne45Color, btne55Color, btnsetTimeColor;
-    private View view1, view2, view3, view4, view5;
     private Spinner spn_choseMinute;
     private TextView date_timeTxt, txt_yourAlert, txt_Teams, txt_yourAlertBet;
     private DBHelper mydb;
     private MyService myService;
     private Intent mServiceIntent;
-    private String[] spinnerItems;
     private String choose;
     private Boolean isGeneric;
-    private ArrayList<LiveScoresPojo> results = new ArrayList<>();
+    private ArrayList results = new ArrayList<LiveScoresPojo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert);
 
-        MainActivity.live = false;
+        //MainActivity.live = false;
 
         AdView adViewAlertAct = findViewById(R.id.adViewAlertAct);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -70,7 +67,7 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         String anytime = getString(R.string.any_time);
         String halftime = getString(R.string.half_time);
         String fulltime = getString(R.string.full_time);
-        spinnerItems = new String[]{
+        String[] spinnerItems = new String[]{
                 choose,
                 anytime,
                 halftime,
@@ -83,26 +80,39 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         ClickableFalse();
 
         Bundle extras = getIntent().getExtras();
-        isGeneric = extras.getBoolean("isGeneric");
-        if (isGeneric) {
-            results = extras.getParcelableArrayList("results");
-            //results = getIntent().getParcelableArrayListExtra("results");
-            txt_Teams.setText(getString(R.string.set_multi_long));
+        if (extras != null) {
+            isGeneric = extras.getBoolean("isGeneric");
+            if (isGeneric) {
+                results = extras.getParcelableArrayList("results");
+                //results = getIntent().getParcelableArrayListExtra("results");
+                txt_Teams.setText(getString(R.string.set_multi_long));
+                spinnerItems = new String[]{
+                        choose,
+                        anytime,
+                        halftime,
+                        "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90"};
+            } else {
+                local = extras.getString("local");
+                visitor = extras.getString("visitor");
+                matchId = extras.getString("matchId");
+                minute = extras.getString("minute");
+                localScore = extras.getString("localScore");
+                visitorScore = extras.getString("visitorScore");
+
+                if (Integer.parseInt(minute) == 0) {
+                    minute = getResources().getString(R.string.half_time);
+                    txt_Teams.setText(local + "  " + localScore + " - " + visitorScore + "  " + visitor + "    " + minute);
+                } else {
+                    txt_Teams.setText(local + "  " + localScore + " - " + visitorScore + "  " + visitor + "    " + minute + "'");
+                }
+            }
         } else {
-            local = extras.getString("local");
-            visitor = extras.getString("visitor");
-            matchId = extras.getString("matchId");
-            minute = extras.getString("minute");
-            localScore = extras.getString("localScore");
-            visitorScore = extras.getString("visitorScore");
-
-            txt_Teams.setText(local + "  " + localScore + " - " + visitorScore + "  " + visitor + "    " + minute + "'");
-
-            if (Integer.parseInt(minute) == 0)
-                minute = "HT";
+            //startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItems);
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerItems);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         spn_choseMinute.setAdapter(spinnerArrayAdapter);
         spn_choseMinute.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -120,35 +130,9 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
                     spnPos = -1;
                 } else if (spn_choseMinute.getItemAtPosition(i).equals(getString(R.string.any_time))) {
                     ClickableFalse();
+                    changeButtonColorForAnyTime();
                     txt_yourAlert.setText(R.string.your_alert_any_time);
                     spnPos = -2;
-
-                    //Change button color
-                    {
-                        btts_yes.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
-                        btn_btts_yes1.setClickable(true);
-
-                        btn05Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
-                        btn_05.setClickable(true);
-
-                        btn15Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
-                        btn_15.setClickable(true);
-
-                        btn25Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
-                        btn_25.setClickable(true);
-
-                        btn35Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
-                        btn_35.setClickable(true);
-
-                        btn45Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
-                        btn_45.setClickable(true);
-
-                        btn55Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
-                        btn_55.setClickable(true);
-
-                        btnsetTimeColor.setColor(ContextCompat.getColor(getApplicationContext(), R.color.set_time));
-                        btn_setTime.setClickable(true);
-                    }
                 } else if (spn_choseMinute.getItemAtPosition(i).equals(getString(R.string.half_time))) {
                     changeButtonColor();
                     txt_yourAlert.setText(R.string.your_alert_half_time);
@@ -236,8 +220,10 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         btts_no = (GradientDrawable) btn_btts_no1.getBackground();
         btts_no.setColor(ContextCompat.getColor(this, R.color.red));
 
-        btn_score = (GradientDrawable) btn_Score.getBackground();
-        btn_score.setColor(ContextCompat.getColor(this, R.color.red));
+        if (!isGeneric) {
+            btn_score = (GradientDrawable) btn_Score.getBackground();
+            btn_score.setColor(ContextCompat.getColor(this, R.color.red));
+        }
 
         btnno_GoalColor = (GradientDrawable) btn_noGoal.getBackground();
         btnno_GoalColor.setColor(ContextCompat.getColor(this, R.color.black));
@@ -281,7 +267,9 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         btn_noGoal.setClickable(true);
         btn_btts_yes1.setClickable(true);
         btn_btts_no1.setClickable(true);
-        btn_Score.setClickable(true);
+        if (!isGeneric) {
+            btn_Score.setClickable(true);
+        }
         btn_05.setClickable(true);
         btn_15.setClickable(true);
         btn_25.setClickable(true);
@@ -295,6 +283,32 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         btn_e55.setClickable(true);
     }
 
+    public void changeButtonColorForAnyTime() {
+        btts_yes.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        btn_btts_yes1.setClickable(true);
+
+        btn05Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
+        btn_05.setClickable(true);
+
+        btn15Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        btn_15.setClickable(true);
+
+        btn25Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
+        btn_25.setClickable(true);
+
+        btn35Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        btn_35.setClickable(true);
+
+        btn45Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
+        btn_45.setClickable(true);
+
+        btn55Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        btn_55.setClickable(true);
+
+        btnsetTimeColor.setColor(ContextCompat.getColor(getApplicationContext(), R.color.set_time));
+        btn_setTime.setClickable(true);
+    }
+
     public void Resources() {
         spn_choseMinute = findViewById(R.id.spinner);
         btn_setTime = findViewById(R.id.btn_setTime);
@@ -304,32 +318,32 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         txt_yourAlertBet = findViewById(R.id.txt_yourAlertBet);
 
         //İnclude 5
-        view5 = findViewById(R.id.include_5);
+        View view5 = findViewById(R.id.include_5);
         btn_Score = view5.findViewById(R.id.buttonOne);
         btn_btts_yes1 = view5.findViewById(R.id.buttonTwo);
         btn_btts_no1 = view5.findViewById(R.id.buttonThree);
 
         // İnclude 1
-        view1 = findViewById(R.id.include_1);
+        View view1 = findViewById(R.id.include_1);
         btn_noGoal = view1.findViewById(R.id.buttonOne);
         btn_05 = view1.findViewById(R.id.buttonTwo);
         btn_15 = view1.findViewById(R.id.buttonThree);
 
         // İnclude 2
-        view2 = findViewById(R.id.include_2);
+        View view2 = findViewById(R.id.include_2);
         btn_25 = view2.findViewById(R.id.buttonOne);
         btn_35 = view2.findViewById(R.id.buttonTwo);
         btn_45 = view2.findViewById(R.id.buttonThree);
 
 
         // İnclude 3
-        view3 = findViewById(R.id.include_3);
+        View view3 = findViewById(R.id.include_3);
         btn_55 = view3.findViewById(R.id.buttonOne);
         btn_e15 = view3.findViewById(R.id.buttonTwo);
         btn_e25 = view3.findViewById(R.id.buttonThree);
 
         // İnclude 4
-        view4 = findViewById(R.id.include_4);
+        View view4 = findViewById(R.id.include_4);
         btn_e35 = view4.findViewById(R.id.buttonOne);
         btn_e45 = view4.findViewById(R.id.buttonTwo);
         btn_e55 = view4.findViewById(R.id.buttonThree);
@@ -359,6 +373,13 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         btn_btts_yes1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btts_yes = (GradientDrawable) btn_btts_yes1.getBackground();
+                btts_yes.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_btts_yes1.getText());
                 bet = 1.1;
             }
@@ -367,6 +388,13 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         btn_btts_no1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btts_no = (GradientDrawable) btn_btts_no1.getBackground();
+                btts_no.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_btts_no1.getText());
                 bet = -1.1;
             }
@@ -375,6 +403,13 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         btn_Score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btn_score = (GradientDrawable) btn_Score.getBackground();
+                btn_score.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_Score.getText());
                 bet = -8.8;
             }
@@ -383,83 +418,178 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
         btn_noGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btnno_GoalColor = (GradientDrawable) btn_noGoal.getBackground();
+                btnno_GoalColor.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_noGoal.getText());
                 bet = -9.9;
             }
         });
+
         btn_05.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btn05Color = (GradientDrawable) btn_05.getBackground();
+                btn05Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_05.getText());
                 bet = 0.5;
             }
         });
+
         btn_15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btn15Color = (GradientDrawable) btn_15.getBackground();
+                btn15Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_15.getText());
                 bet = 1.5;
             }
         });
+
         btn_25.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btn25Color = (GradientDrawable) btn_25.getBackground();
+                btn25Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_25.getText());
                 bet = 2.5;
             }
         });
+
         btn_35.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btn35Color = (GradientDrawable) btn_35.getBackground();
+                btn35Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_35.getText());
                 bet = 3.5;
             }
         });
+
         btn_45.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btn45Color = (GradientDrawable) btn_45.getBackground();
+                btn45Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_45.getText());
                 bet = 4.5;
             }
         });
+
         btn_55.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btn55Color = (GradientDrawable) btn_55.getBackground();
+                btn55Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_55.getText());
                 bet = 5.5;
             }
         });
+
         btn_e15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btne15Color = (GradientDrawable) btn_e15.getBackground();
+                btne15Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_e15.getText());
                 bet = -1.5;
             }
         });
+
         btn_e25.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btne25Color = (GradientDrawable) btn_e25.getBackground();
+                btne25Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_e25.getText());
                 bet = -2.5;
             }
         });
+
         btn_e35.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btne35Color = (GradientDrawable) btn_e35.getBackground();
+                btne35Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_e35.getText());
                 bet = -3.5;
             }
         });
+
         btn_e45.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btne45Color = (GradientDrawable) btn_e45.getBackground();
+                btne45Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_e45.getText());
                 bet = -4.5;
             }
         });
+
         btn_e55.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spn_choseMinute.getSelectedItem().equals(getString(R.string.any_time)))
+                    changeButtonColorForAnyTime();
+                else
+                    changeButtonColor();
+                btne55Color = (GradientDrawable) btn_e55.getBackground();
+                btne55Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.toolbar));
+
                 txt_yourAlertBet.setText(btn_e55.getText());
                 bet = -5.5;
             }
@@ -498,7 +628,7 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
                             LiveScoresPojo lsp;
                             int count = 0;
                             for (int i = 0; i < results.size(); i++) {
-                                lsp = results.get(i);
+                                lsp = (LiveScoresPojo) results.get(i);
                                 if (lsp.getMatchId() != -1) {
                                     if (spnPos > 0) {
                                         // dk bazlı
@@ -507,29 +637,28 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
                                             min = 45;
                                         if (spnPos > min) {
                                             if (bet == 1.1) {
-                                                if (!(lsp.getLocalScore() > 0 && lsp.getVisitorScore() > 0)) {
+                                                if (lsp.getLocalScore() == 0 || lsp.getVisitorScore() == 0) {
                                                     insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                                     count++;
                                                 }
                                             } else if (bet == -1.1) {
-                                                if (!(lsp.getLocalScore() == 0 || lsp.getVisitorScore() == 0)) {
+                                                if (lsp.getLocalScore() == 0 || lsp.getVisitorScore() == 0) {
                                                     insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                                     count++;
                                                 }
                                             } else if (bet == -8.8) {
+                                                //skor alarmı - genericte buraya hiç girmeyecek silinebilir
                                                 insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                                 count++;
                                             } else if (bet == -9.9) {
-                                                if (!(lsp.getLocalScore() == 0 && lsp.getVisitorScore() == 0)) {
+                                                if (lsp.getLocalScore() == 0 && lsp.getVisitorScore() == 0) {
                                                     insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                                     count++;
                                                 }
-                                            } else if (lsp.getLocalScore() + lsp.getVisitorScore() < Math.abs(bet)) {
+                                            } else if ((lsp.getLocalScore() + lsp.getVisitorScore()) < Math.abs(bet)) {
                                                 insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                                 count++;
                                             }
-                                            //insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
-                                            //count++;
                                         }
                                     } else if (spnPos == -2) {
                                         // any time
@@ -538,8 +667,18 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
                                                 insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                                 count++;
                                             }
+                                        } else if (bet == -1.1) {
+                                            if (lsp.getLocalScore() == 0 || lsp.getVisitorScore() == 0) {
+                                                insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
+                                                count++;
+                                            }
+                                        } else if (bet == -9.9) {
+                                            if (lsp.getLocalScore() == 0 && lsp.getVisitorScore() == 0) {
+                                                insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
+                                                count++;
+                                            }
                                         } else {
-                                            if (bet > (lsp.getLocalScore() + lsp.getVisitorScore())) {
+                                            if (Math.abs(bet) > (lsp.getLocalScore() + lsp.getVisitorScore())) {
                                                 insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                                 count++;
                                             }
@@ -547,20 +686,41 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
                                     } else if (spnPos == -3) {
                                         // half time
                                         if (lsp.getMinute() < 45 && lsp.getMinute() != 0) {
-                                            insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
-                                            count++;
+                                            if (bet == 1.1) {
+                                                if (lsp.getLocalScore() == 0 || lsp.getVisitorScore() == 0) {
+                                                    insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
+                                                    count++;
+                                                }
+                                            } else if (bet == -1.1) {
+                                                if (lsp.getLocalScore() == 0 || lsp.getVisitorScore() == 0) {
+                                                    insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
+                                                    count++;
+                                                }
+                                            } else if (bet == -9.9) {
+                                                if (lsp.getLocalScore() == 0 && lsp.getVisitorScore() == 0) {
+                                                    insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
+                                                    count++;
+                                                }
+                                            } else {
+                                                if (Math.abs(bet) > (lsp.getLocalScore() + lsp.getVisitorScore())) {
+                                                    insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
+                                                    count++;
+                                                }
+                                            }
                                         }
                                     } else if (spnPos == -4) {
-                                        // full time
+                                        // full time - genericte buraya hiç girmeyecek silinebilir
                                         insert(lsp.getLocalTeam(), lsp.getVisitorTeam(), spnPos, bet, lsp.getMatchId() + "");
                                         count++;
                                     }
                                 }
                             }
-                            Toast.makeText(this, count + " Alarm Seted", Toast.LENGTH_LONG).show();
+                            if (count == 0) {
+                                Toast.makeText(this, "No available matches", Toast.LENGTH_SHORT).show();
+                            } else
+                                Toast.makeText(this, count + " Alarm Seted", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(this, "Alarm cant seted. Try again", Toast.LENGTH_LONG).show();
-                            finish();
+                            Toast.makeText(this, "Alarm cant seted. Try again", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         mydb = new DBHelper(this);
@@ -580,9 +740,11 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
 
                         if (Build.VERSION.SDK_INT >= 23) {
                             if (checkPermission()) {
-                                startService(mServiceIntent);
-                                Intent asd = new Intent(this, MainActivity.class);
-                                startActivity(asd);
+                                if (!isMyServiceRunning(MyService.class)) {
+                                    startService(mServiceIntent);
+                                    Log.wtf("again", "servisi başlattı");
+                                }
+                                //startActivity(new Intent(this, MainActivity.class));
                                 finish();
                             } else {
                                 requestPermission();
@@ -614,9 +776,11 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
 
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkPermission()) {
-                startService(mServiceIntent);
-                Intent asd = new Intent(this, MainActivity.class);
-                startActivity(asd);
+                if (!isMyServiceRunning(MyService.class)) {
+                    startService(mServiceIntent);
+                    Log.wtf("again", "servisi başlattı");
+                }
+                //startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else {
                 requestPermission();
@@ -640,19 +804,23 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startService(mServiceIntent);
-                    Intent asd = new Intent(this, MainActivity.class);
-                    startActivity(asd);
+                    if (!isMyServiceRunning(MyService.class)) {
+                        startService(mServiceIntent);
+                        Log.wtf("again", "servisi başlattı");
+                    }
+                    //startActivity(new Intent(this, MainActivity.class));
                     finish();
                 } else {
                     Log.wtf("AlertAct", "else den service'i baslattı yani permissionı alamadan servise gitti");
-                    startService(mServiceIntent);
-                    Intent asd = new Intent(this, MainActivity.class);
-                    startActivity(asd);
+                    if (!isMyServiceRunning(MyService.class)) {
+                        startService(mServiceIntent);
+                        Log.wtf("again", "servisi başlattı");
+                    }
+                    //startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }
                 break;
@@ -661,20 +829,22 @@ public class AlertActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                Log.i("isMyServiceRunning?", true + "");
-                return true;
+        if (manager != null) {
+            for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+                if (serviceClass.getName().equals(service.service.getClassName())) {
+                    Log.wtf("AlertAct - isMyServiceRunning?", true + "");
+                    return true;
+                }
             }
         }
-        Log.i("isMyServiceRunning?", false + "");
+        Log.wtf("AlertAct - isMyServiceRunning?", false + "");
         return false;
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
+        super.onBackPressed();
+        //startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 

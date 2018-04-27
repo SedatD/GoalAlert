@@ -28,13 +28,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,15 +52,16 @@ import java.util.Date;
 
 import vavien.agency.goalalert.AlertActivity;
 import vavien.agency.goalalert.MainActivity;
+import vavien.agency.goalalert.MatchDetailActivity;
 import vavien.agency.goalalert.MySingleton;
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.LiveScoresRecyclerViewAdapter;
 import vavien.agency.goalalert.pojoClasses.LiveScoresPojo;
 
 public class Fragment_liveScores extends Fragment implements View.OnClickListener {
+    int[][][] matrix = new int[999][99][3];
     private int huntFilter = 0;
     private int huntFilterMin = 0;
-    int[][][] matrix = new int[999][99][3];
     private JSONArray jsonArray_lastLive;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -71,6 +77,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
     private int matchLenght = 0;
     private LiveScoresPojo aq;
     private LinearLayout linearLayout_generic;
+    private ProgressBar progressBar;
 
     public static void expand(final View v) {
         v.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -148,6 +155,10 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
         });
 
         setRetainInstance(true);
+
+        progressBar = rootview.findViewById(R.id.progressBar);
+        progressBar.bringToFront();
+        progressBar.setDrawingCacheBackgroundColor(getResources().getColor(R.color.denemetab));
 
         btn_Search = rootview.findViewById(R.id.searchButton);
         btn_CancelSearch = rootview.findViewById(R.id.searchCancelButton);
@@ -307,6 +318,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
             @Override
             public void onResponse(final JSONArray response) {
                 Log.wtf("Response liveScores", response.toString());
+                progressBar.setVisibility(View.GONE);
                 jsonArray_lastLive = response;
 
                 if (jsonArray_lastLive.length() == 0) {
@@ -568,20 +580,24 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                         else
                             aq = (LiveScoresPojo) results.get(position);
 
-                        Log.wtf("liveScores", "getAct() : " + getActivity() + " / isAdded() : " + isAdded());
-
-                        if (isAdded() && ctx != null) {
-                            Intent intent = new Intent(ctx, AlertActivity.class); // java.lang.NullPointerException: Attempt to invoke virtual method 'android.content.Context android.support.v4.app.FragmentActivity.getApplicationContext()' on a null object reference
-                            intent.putExtra("isGeneric", false);
-                            intent.putExtra("local", aq.getLocalTeam());
-                            intent.putExtra("visitor", aq.getVisitorTeam());
-                            intent.putExtra("minute", aq.getMinute() + "");
-                            intent.putExtra("localScore", aq.getLocalScore() + "");
-                            intent.putExtra("visitorScore", aq.getVisitorScore() + "");
-                            intent.putExtra("matchId", aq.getMatchId() + "");
-                            //MainActivity.live = false;
-                            startActivity(intent);
-                            getActivity().finish();
+                        if (v.getId() == R.id.btnAlert) {
+                            Log.wtf("liveScores", "getAct() : " + getActivity() + " / isAdded() : " + isAdded());
+                            if (isAdded() && ctx != null) {
+                                Intent intent = new Intent(ctx, AlertActivity.class); // java.lang.NullPointerException: Attempt to invoke virtual method 'android.content.Context android.support.v4.app.FragmentActivity.getApplicationContext()' on a null object reference
+                                intent.putExtra("isGeneric", false);
+                                intent.putExtra("local", aq.getLocalTeam());
+                                intent.putExtra("visitor", aq.getVisitorTeam());
+                                intent.putExtra("minute", aq.getMinute() + "");
+                                intent.putExtra("localScore", aq.getLocalScore() + "");
+                                intent.putExtra("visitorScore", aq.getVisitorScore() + "");
+                                intent.putExtra("matchId", aq.getMatchId() + "");
+                                //MainActivity.live = false;
+                                startActivity(intent);
+                                //getActivity().finish();
+                            }
+                        } else if (v.getId() == R.id.btnStats) {
+                            getStats(aq.getLeagueId(), aq.getMatchId());
+                            progressBar.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -713,7 +729,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                     intent.putExtra("isGeneric", true);
                     intent.putParcelableArrayListExtra("results", results);
                     startActivity(intent);
-                    getActivity().finish();
+                    //getActivity().finish();
                 }
                 break;
         }
@@ -848,6 +864,60 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    private void getStats(int leaugeid, final int matchid) {
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        //StringRequest getRequest = new StringRequest(Request.Method.GET, "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/" + leaugeid + ".xml?json=1",
+        StringRequest getRequest = new StringRequest(Request.Method.GET, "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/1005.xml?json=1",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(final String response) {
+                        Log.wtf("onResponse stats", response);
+                        progressBar.setVisibility(View.GONE);
+
+                        String ligName = "";
+                        JSONObject match = null;
+                        JSONObject tournament = null;
+                        try {
+                            tournament = new JSONObject(response).getJSONObject("commentaries").getJSONObject("tournament");
+                            ligName = tournament.getString("@name");
+                            JSONArray jsonArray = tournament.getJSONArray("match");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                //if (matchid == jsonObject.getInt("@id"))
+                                    match = jsonObject;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            try {
+                                if (tournament != null) {
+                                    match = tournament.getJSONObject("match");
+                                }
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
+                        if (isAdded() && ctx != null && match != null) {
+                            Intent intent = new Intent(ctx, MatchDetailActivity.class);
+                            intent.putExtra("ligName", ligName);
+                            intent.putExtra("match", match.toString());
+                            startActivity(intent);
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.wtf("onErrorResponse stats", error.toString());
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(ctx, "There is no statistics for this match", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        getRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(getRequest);
     }
 
 }

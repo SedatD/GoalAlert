@@ -47,10 +47,13 @@ public class LiveScoresPojo implements android.os.Parcelable {
     }
 
     protected LiveScoresPojo(Parcel in) {
+        leagueId = in.readInt();
         matchId = in.readInt();
-        minute = in.readInt();
         localTeam = in.readString();
         visitorTeam = in.readString();
+        localScore = in.readInt();
+        visitorScore = in.readInt();
+        minute = in.readInt();
     }
 
     @Override
@@ -60,10 +63,13 @@ public class LiveScoresPojo implements android.os.Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(leagueId);
         dest.writeInt(matchId);
-        dest.writeInt(minute);
         dest.writeString(localTeam);
         dest.writeString(visitorTeam);
+        dest.writeInt(localScore);
+        dest.writeInt(visitorScore);
+        dest.writeInt(minute);
     }
 
     public static final Creator<LiveScoresPojo> CREATOR = new Creator<LiveScoresPojo>() {

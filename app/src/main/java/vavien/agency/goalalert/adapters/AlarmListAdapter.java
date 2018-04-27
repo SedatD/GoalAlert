@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -58,8 +58,8 @@ public class AlarmListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
         @SuppressLint({"ViewHolder", "InflateParams"}) final View viewRow = mInflater.inflate(R.layout.listview_fragment_alert_row, null);
         Holder holder = new Holder();
-        holder.textAlertList = (TextView) viewRow.findViewById(textAlertList);
-        holder.btnCancel = (Button) viewRow.findViewById(R.id.btnCancelAlert);
+        holder.textAlertList = viewRow.findViewById(textAlertList);
+        holder.btnCancel =  viewRow.findViewById(R.id.btnCancelAlert);
 
         final AlertsPojo alert = mAlarms.get(position);
 
@@ -81,6 +81,6 @@ public class AlarmListAdapter extends BaseAdapter {
 
     private class Holder {
         TextView textAlertList;
-        Button btnCancel;
+        ImageView btnCancel;
     }
 }

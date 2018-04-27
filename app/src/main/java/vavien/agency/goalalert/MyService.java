@@ -1,5 +1,6 @@
 package vavien.agency.goalalert;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -67,8 +69,11 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        if (timer == null)
+        Log.wtf("MyService", "onStartCommand");
+        if (timer == null) {
             startTimer();
+            Log.wtf("MyService", "onStartCommand - startTimer()");
+        }
         return START_STICKY;
     }
 
@@ -84,7 +89,7 @@ public class MyService extends Service {
         initializeTimerTask();
         //schedule the timer, to wake up every 11 second
         //timer.schedule(timerTask, 1000, 11000);
-        timer.scheduleAtFixedRate(timerTask, 1000, 11000);
+        timer.scheduleAtFixedRate(timerTask, 1000, 20000);
     }
 
     public void initializeTimerTask() {
@@ -177,6 +182,12 @@ public class MyService extends Service {
                 Log.wtf("MyService", "operation basinda getAllContacts okuyamadigi icin girdi buraya : " + e);
             }
         }
+
+        /*if(notot){
+            işlemden çık
+        }else{
+            bizim standart işlem
+        }*/
 
         switch (alarmMin) {
             case -1:
@@ -548,7 +559,8 @@ public class MyService extends Service {
                         Boolean first = jsonObject.getBoolean("first");
                         Boolean second = jsonObject.getBoolean("second");
 
-                        operation(arrMatchId.get(i), localTeam, visitorTeam, localScore, visitorScore, minute, first, second, arrDbId.get(i));
+                        //operation(arrMatchId.get(i), localTeam, visitorTeam, localScore, visitorScore, minute, first, second, arrDbId.get(i));
+                        new AscOperation().execute(arrMatchId.get(i) + "", localTeam, visitorTeam, localScore, visitorScore, minute, first + "", second + "", arrDbId.get(i) + "");
                     }
 
                 } catch (JSONException e) {
@@ -588,6 +600,360 @@ public class MyService extends Service {
         postRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //MySingleton.getInstance(ctx).addToRequestQueue(postRequest);
         queue.add(postRequest);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class AscOperation extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            /*for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }*/
+
+            int total = parseInt(params[3]) + parseInt(params[4]);
+            int alarmMin = -1;
+            double bet = 31.31;
+            String status = getString(R.string.failed);
+            boolean boolStatus = false;
+
+            for (int qwe = 0; qwe < dbHelper.getAllCotacts().size(); qwe++) {
+                try {
+                    String[] asd = dbHelper.getAllCotacts().get(qwe).split(" - ");
+                    if (parseInt(asd[5]) == parseInt(params[0]) && parseInt(asd[0]) == parseInt(params[8])) {
+                        alarmMin = parseInt(asd[3]);
+                        bet = Double.parseDouble(asd[4]);
+                    }
+                } catch (Exception e) {
+                    Log.wtf("MyService", "operation basinda getAllContacts okuyamadigi icin girdi buraya : " + e);
+                }
+            }
+
+            switch (alarmMin) {
+                case -1:
+                    Log.wtf("MyService", "operation da case -1 e girdi yani mevcut bir eslesme bulamadi - dbidd : " + parseInt(params[8]));
+                    break;
+                case -2: // ANY TIME
+                    Log.wtf("ANY TIME", "BET : " + bet + " - TOTAL : " + total);
+                    if (parseInt(params[5]) >= 0 && !Boolean.parseBoolean(params[7])) {
+                        Log.wtf("ANY TIME", "min > 0 // yani maç oynanıyor");
+                        if (bet == 1.1) {
+                            Log.wtf("ANY TIME", "bet == 1.1 // btts yes");
+                            if (parseInt(params[3]) > 0 && parseInt(params[4]) > 0) {
+                                boolStatus = true;
+                                status = getString(R.string.both_teams_scored);
+                                notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                                callDelete(parseInt(params[8]));
+                            }
+                        } else if (bet < total) {
+                            if (total > 0)
+                                status = getString(R.string.there_is_a_scorer);
+                            if (total > 1)
+                                status = getString(R.string.its_over_15);
+                            if (total > 2)
+                                status = getString(R.string.its_over_25);
+                            if (total > 3)
+                                status = getString(R.string.its_over_35);
+                            if (total > 4)
+                                status = getString(R.string.its_over_45);
+                            Log.wtf("ANY TIME", "bet < total");
+                            boolStatus = true;
+                            notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                            callDelete(parseInt(params[8]));
+                        }
+                    } else {
+                        Log.wtf("ANY TIME", "else min !> 0 // macın minute'ı 0dan buyuk degil // mac  bitti demek");
+                        boolStatus = false;
+                        status = getString(R.string.full_time);
+                        if (bet == 0.5)
+                            status += getString(R.string.poor_match);
+                        if (bet == 1.5)
+                            status += getString(R.string.finished_15);
+                        if (bet == 2.5)
+                            status += getString(R.string.finished_25);
+                        if (bet == 3.5)
+                            status += getString(R.string.finished_35);
+                        if (bet == 4.5)
+                            status += getString(R.string.finished_45);
+                        notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                        callDelete(parseInt(params[8]));
+                    }
+                    break;
+                case -3: // HALF TIME
+                    Log.wtf("HALF TIME", "BET : " + bet + " - TOTAL : " + total);
+                    if (parseInt(params[5]) >= 0) {
+                        Log.wtf("HALF TIME", "min > 0 // yani maç oynanıyor");
+                        if (Boolean.parseBoolean(params[6])) {
+                            boolStatus = false;
+                            status = "";
+                            Log.wtf("HALF TIME", "first // zamanı geldi");
+                            if (bet == 1.1) {
+                                Log.wtf("HALF TIME", "bet == 1.1 // btts yes");
+                                if (parseInt(params[3]) > 0 && parseInt(params[4]) > 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.both_teams_scored);
+                                } else {
+                                    boolStatus = false;
+                                    status = getString(R.string.one_team_didnt_score);
+                                }
+                            } else if (bet == -1.1) {
+                                Log.wtf("HALF TIME", "bet == -1.1 // btts no");
+                                if (parseInt(params[3]) == 0 || parseInt(params[4]) == 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.one_team_didnt_score);
+                                } else {
+                                    boolStatus = false;
+                                    status = getString(R.string.both_teams_scored);
+                                }
+                            } else if (bet == -8.8) {
+                                Log.wtf("HALF TIME", "bet == -8.8 // skor");
+                                boolStatus = true;
+                                status = getString(R.string.score_info);
+                            } else if (bet == -9.9) {
+                                Log.wtf("HALF TIME", "bet == -9.9 // no goal");
+                                if (parseInt(params[3]) == 0 && parseInt(params[4]) == 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.no_goal);
+                                } else {
+                                    boolStatus = false;
+                                    status = getString(R.string.there_is_a_scorer);
+                                }
+                            } else {
+                                if (bet > 0) {
+                                    Log.wtf("HALF TIME", "else bet > 0");
+                                    if (bet < total) {
+                                        Log.wtf("HALF TIME", "bet < total");
+                                        status = getString(R.string.success);
+                                        boolStatus = true;
+                                        if (total > 0)
+                                            status = getString(R.string.there_is_a_scorer);
+                                        if (total > 1)
+                                            status = getString(R.string.its_over_15);
+                                        if (total > 2)
+                                            status = getString(R.string.its_over_25);
+                                        if (total > 3)
+                                            status = getString(R.string.its_over_35);
+                                        if (total > 4)
+                                            status = getString(R.string.its_over_45);
+                                    } else {
+                                        status = getString(R.string.its) + bet + " !";
+                                        boolStatus = false;
+                                    }
+                                } else if (Math.abs(bet) > total) {
+                                    Log.wtf("HALF TIME", "else if Math.abs(bet) > total");
+                                    status = getString(R.string.success);
+                                    boolStatus = true;
+                                    if (bet == -0.5)
+                                        status = getString(R.string.no_goal);
+                                    if (bet == -1.5)
+                                        status = getString(R.string.it_is_over_eksi15);
+                                    if (bet == -2.5)
+                                        status = getString(R.string.it_is_over_eksi25);
+                                    if (bet == -3.5)
+                                        status = getString(R.string.it_is_over_eksi35);
+                                    if (bet == -4.5)
+                                        status = getString(R.string.it_is_over_eksi45);
+                                } else {
+                                    status = getString(R.string.its) + bet + " !";
+                                    boolStatus = false;
+                                }
+                            }
+                            String ht = getString(R.string.half_time);
+                            notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                            callDelete(parseInt(params[8]));
+                        }
+                    } else {
+                        Log.wtf("HALF TIME", "else min !> 0 // macın minute'ı 0dan buyuk degil // mac  bitti demek");
+                        status = getString(R.string.failed);
+                        notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                        callDelete(parseInt(params[8]));
+                    }
+                    break;
+                case -4: // FULL TIME
+                    Log.wtf("FULL TIME", "BET : " + bet + " - TOTAL : " + total);
+                    if (parseInt(params[5]) >= 0) {
+                        Log.wtf("FULL TIME", "min > 0 // yani maç oynanıyor");
+                        if (Boolean.parseBoolean(params[7])) {
+                            boolStatus = false;
+                            status = getString(R.string.full_time);
+                            Log.wtf("FULL TIME", "second // zamanı geldi");
+                            if (bet == 1.1) {
+                                Log.wtf("FULL TIME", "bet == 1.1 // btts yes");
+                                if (parseInt(params[3]) > 0 && parseInt(params[4]) > 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.both_teams_scored);
+                                } else
+                                    status = getString(R.string.one_team_didnt_score);
+                            } else if (bet == -1.1) {
+                                Log.wtf("FULL TIME", "bet == -1.1 // btts no");
+                                if (parseInt(params[3]) == 0 || parseInt(params[4]) == 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.one_team_didnt_score);
+                                } else
+                                    status = getString(R.string.both_teams_scored);
+                            } else if (bet == -8.8) {
+                                Log.wtf("FULL TIME", "bet == -8.8 // skor");
+                                boolStatus = true;
+                                status = getString(R.string.score_info);
+                            } else if (bet == -9.9) {
+                                Log.wtf("FULL TIME", "bet == -9.9 // no goal");
+                                if (parseInt(params[3]) == 0 && parseInt(params[4]) == 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.no_goal);
+                                } else
+                                    status = getString(R.string.there_is_a_scorer);
+                            } else {
+                                if (bet > 0) {
+                                    Log.wtf("FULL TIME", "else bet > 0");
+                                    if (bet < total) {
+                                        Log.wtf("FULL TIME", "bet < total");
+                                        status = getString(R.string.success);
+                                        boolStatus = true;
+                                        if (total > 0)
+                                            status = getString(R.string.there_is_a_scorer);
+                                        if (total > 1)
+                                            status = getString(R.string.its_over_15);
+                                        if (total > 2)
+                                            status = getString(R.string.its_over_25);
+                                        if (total > 3)
+                                            status = getString(R.string.its_over_35);
+                                        if (total > 4)
+                                            status = getString(R.string.its_over_45);
+                                    } else
+                                        status = "It's " + bet + " !";
+                                } else if (Math.abs(bet) > total) {
+                                    Log.wtf("FULL TIME", "else if Math.abs(bet) > total");
+                                    status = getString(R.string.success);
+                                    boolStatus = true;
+                                    if (bet == -0.5)
+                                        status = getString(R.string.no_goal);
+                                    if (bet == -1.5)
+                                        status = getString(R.string.it_is_over_eksi15);
+                                    if (bet == -2.5)
+                                        status = getString(R.string.it_is_over_eksi25);
+                                    if (bet == -3.5)
+                                        status = getString(R.string.it_is_over_eksi35);
+                                    if (bet == -4.5)
+                                        status = getString(R.string.it_is_over_eksi45);
+                                } else
+                                    status = getString(R.string.its) + bet + " !";
+                            }
+                            String ft = getString(R.string.full_time);
+                            notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                            callDelete(parseInt(params[8]));
+                        }
+                    } else {
+                        Log.wtf("FULL TIME", "else min !> 0 // macın minute'ı 0dan buyuk degil // mac  bitti demek");
+                        status = "Full Time Failed";
+                        boolStatus = false;
+                        notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                        callDelete(parseInt(params[8]));
+                    }
+                    break;
+                default: // NORMAL DK LAR
+                    Log.wtf("NORMAL DK LAR", "BET : " + bet + " - TOTAL : " + total + " - ALARM MIN : " + alarmMin);
+                    if (parseInt(params[5]) >= 0 && !Boolean.parseBoolean(params[7])) {
+                        Log.wtf("NORMAL DK LAR", "min > 0 // yani maç oynanıyor");
+                        if (alarmMin <= parseInt(params[5])) {
+                            status = getString(R.string.failed);
+                            boolStatus = false;
+                            Log.wtf("NORMAL DK LAR", "zamanı geldi");
+                            if (bet == 1.1) {
+                                Log.wtf("NORMAL DK LAR", "bet == 1.1 // btts yes");
+                                if (parseInt(params[3]) > 0 && parseInt(params[4]) > 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.both_teams_scored);
+                                } else
+                                    status = getString(R.string.one_team_didnt_score);
+                            } else if (bet == -1.1) {
+                                Log.wtf("NORMAL DK LAR", "bet == -1.1 // btts no");
+                                if (parseInt(params[3]) == 0 || parseInt(params[4]) == 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.one_team_didnt_score);
+                                } else
+                                    status = getString(R.string.both_teams_scored);
+                            } else if (bet == -8.8) {
+                                Log.wtf("NORMAL DK LAR", "bet == -8.8 // skor");
+                                boolStatus = true;
+                                status = getString(R.string.score_info);
+                            } else if (bet == -9.9) {
+                                Log.wtf("NORMAL DK LAR", "bet == -9.9 // no goal");
+                                if (parseInt(params[3]) == 0 && parseInt(params[4]) == 0) {
+                                    boolStatus = true;
+                                    status = getString(R.string.no_goal_yet);
+                                } else
+                                    status = getString(R.string.already_goal);
+                            } else {
+                                if (bet > 0) {
+                                    Log.wtf("NORMAL DK LAR", "else bet > 0");
+                                    if (bet < total) {
+                                        Log.wtf("NORMAL DK LAR", "bet < total");
+                                        status = getString(R.string.success);
+                                        boolStatus = true;
+                                        if (total > 0)
+                                            status = getString(R.string.its_over_05);
+                                        if (total > 1)
+                                            status = getString(R.string.its_over_15);
+                                        if (total > 2)
+                                            status = getString(R.string.its_over_25);
+                                        if (total > 3)
+                                            status = getString(R.string.its_over_35);
+                                        if (total > 4)
+                                            status = getString(R.string.its_over_45);
+                                    } else
+                                        status = getString(R.string.its) + bet + " !";
+                                } else if (Math.abs(bet) > total) {
+                                    Log.wtf("NORMAL DK LAR", "else if Math.abs(bet) > total");
+                                    status = getString(R.string.success);
+                                    boolStatus = true;
+                                    if (bet == -0.5)
+                                        status = getString(R.string.no_goal);
+                                    if (bet == -1.5)
+                                        status = getString(R.string.it_is_over_eksi15);
+                                    if (bet == -2.5)
+                                        status = getString(R.string.it_is_over_eksi25);
+                                    if (bet == -3.5)
+                                        status = getString(R.string.it_is_over_eksi35);
+                                    if (bet == -4.5)
+                                        status = getString(R.string.it_is_over_eksi45);
+                                    if (bet == -5.5)
+                                        status = getString(R.string.it_is_over_eksi55);
+                                } else
+                                    status = getString(R.string.its) + bet + " !";
+                            }
+                            notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                            callDelete(parseInt(params[8]));
+                        }
+                    } else {
+                        Log.wtf("NORMAL DK LAR", "else min !> 0 // macın minute'ı 0dan buyuk degil // mac  bitti demek");
+                        status = getString(R.string.failed);
+                        boolStatus = false;
+                        notif(parseInt(params[8]), params[1], params[2], parseInt(params[3]), parseInt(params[4]), params[5], status, boolStatus);
+                        callDelete(parseInt(params[8]));
+                    }
+                    break;
+            }
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //txt.setText("Executed"); // txt.setText(result);
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+
     }
 
 }
