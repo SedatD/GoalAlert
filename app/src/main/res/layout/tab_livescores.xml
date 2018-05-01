@@ -17,15 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp">
 
             <Button
                 android:id="@+id/btnHuntNoGoal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -38,7 +38,7 @@
                 android:id="@+id/btnHuntDraw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -51,7 +51,7 @@
                 android:id="@+id/btnHuntWinToNil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -76,15 +76,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp">
 
             <Button
                 android:id="@+id/btnHunt05"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -97,7 +97,7 @@
                 android:id="@+id/btnHuntm25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -110,7 +110,7 @@
                 android:id="@+id/btnHunt25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -135,15 +135,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp">
 
             <Button
                 android:id="@+id/btnHunt030"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -156,7 +157,7 @@
                 android:id="@+id/btnHunt3060"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:maxLines="1"
@@ -181,12 +182,13 @@
 
         <LinearLayout
             android:id="@+id/linearLayout_generic"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp">
 
             <Button
                 android:id="@+id/btnGeneric"
@@ -281,7 +283,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="4dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
@@ -294,7 +296,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="4dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"

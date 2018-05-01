@@ -89,7 +89,7 @@ public class MyService extends Service {
         initializeTimerTask();
         //schedule the timer, to wake up every 11 second
         //timer.schedule(timerTask, 1000, 11000);
-        timer.scheduleAtFixedRate(timerTask, 1000, 20000);
+        timer.scheduleAtFixedRate(timerTask, 1000, 40000);
     }
 
     public void initializeTimerTask() {

@@ -79,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
         adViewAlt.loadAd(adRequest);
 
         mInterstitialAd = new InterstitialAd(this);
-        //mInterstitialAd.setAdUnitId("ca-app-pub-8446699920682817/4254084799"); // orjinal
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
+        mInterstitialAd.setAdUnitId("ca-app-pub-8446699920682817/4254084799"); // orjinal
+        //mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         if (!isNetworkStatusAvialable(getApplicationContext()))
             Toast.makeText(getApplicationContext(), R.string.net_connection, Toast.LENGTH_SHORT).show();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.live));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.result));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.nextmatch));

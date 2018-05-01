@@ -76,7 +76,6 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
     private Context ctx;
     private int matchLenght = 0;
     private LiveScoresPojo aq;
-    private LinearLayout linearLayout_generic;
     private ProgressBar progressBar;
 
     public static void expand(final View v) {
@@ -179,7 +178,6 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
         btnHunt3060 = rootview.findViewById(R.id.btnHunt3060);
         btnHunt6090 = rootview.findViewById(R.id.btnHunt6090);
 
-        linearLayout_generic = rootview.findViewById(R.id.linearLayout_generic);
         btnGeneric = rootview.findViewById(R.id.btnGeneric);
         btnGeneric.setOnClickListener(this);
 
@@ -323,10 +321,8 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
 
                 if (jsonArray_lastLive.length() == 0) {
                     txtNoLiveMatch.setVisibility(View.VISIBLE);
-                    linearLayout_generic.setVisibility(View.GONE);
                 } else {
                     txtNoLiveMatch.setVisibility(View.GONE);
-                    linearLayout_generic.setVisibility(View.VISIBLE);
                 }
 
                 if (matchLenght != 0)
@@ -724,7 +720,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                 hideKeyboard(v);
                 break;
             case R.id.btnGeneric:
-                if (ctx != null) {
+                if (ctx != null && results != null) {
                     Intent intent = new Intent(ctx, AlertActivity.class);
                     intent.putExtra("isGeneric", true);
                     intent.putParcelableArrayListExtra("results", results);
