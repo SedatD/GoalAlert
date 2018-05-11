@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.util;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -38,6 +38,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import vavien.agency.goalalert.R;
+import vavien.agency.goalalert.activity.MainActivity;
 
 import static java.lang.Integer.parseInt;
 
@@ -503,8 +506,8 @@ public class MyService extends Service {
                 new NotificationCompat.Builder(getApplicationContext())
                         .setSmallIcon(R.drawable.bell)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
-                        .setContentTitle(local + " " + localScore + " - " + visitorScore + " " + visitor + "  " + minute + "'")
-                        .setContentText(status);
+                        .setContentTitle(local + " " + localScore + " - " + visitorScore + " " + visitor)
+                        .setContentText(minute + "' " + status);
         mBuilder.setContentIntent(contentIntent);
         if (boolStatus)
             mBuilder.setSound(Uri.parse("android.resource://" + getApplicationContext().getPackageName() + "/" + R.raw.success));

@@ -1,4 +1,4 @@
-package vavien.agency.goalalert.pojoClasses;
+package vavien.agency.goalalert.model;
 
 /**
  * Created by SD on 9.11.2017.

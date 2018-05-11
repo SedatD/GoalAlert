@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import vavien.agency.goalalert.R;
-import vavien.agency.goalalert.pojoClasses.MatchDetailPojo;
+import vavien.agency.goalalert.model.MatchDetailPojo;
 
 /**
  * Created by Sedat
@@ -47,11 +47,16 @@ public class MatchDetailAdapter extends RecyclerView.Adapter<MatchDetailAdapter.
         //holder.imageView_local.getLayoutParams().width = mDataset.get(position).getBarValue();
         //holder.imageView_visitor.getLayoutParams().width = mDataset.get(position).getBarValue();
 
+        ViewGroup.LayoutParams zeroparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0);
         ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, (1 - mDataset.get(position).getBarValue()));
         ViewGroup.LayoutParams paramsbg = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, mDataset.get(position).getBarValue());
 
         holder.imageView_local.setLayoutParams(params);
-        holder.imageView_visitor.setLayoutParams(params);
+
+        if (mDataset.get(position).getVisitorValue() == 0)
+            holder.imageView_visitor.setLayoutParams(zeroparams);
+        else
+            holder.imageView_visitor.setLayoutParams(params);
 
         holder.imageView_local_bg.setLayoutParams(paramsbg);
         holder.imageView_visitor_bg.setLayoutParams(paramsbg);

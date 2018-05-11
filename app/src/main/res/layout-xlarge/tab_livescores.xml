@@ -226,7 +226,6 @@
             android:scrollbars="vertical" />
     </RelativeLayout>
 
-
     <TextView
         android:id="@+id/txtNoLiveMatch"
         android:layout_width="wrap_content"
@@ -237,6 +236,19 @@
         android:text="@string/no_match_live"
         android:textColor="@color/black"
         android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView_noFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="240dp"
+        android:gravity="center"
+        android:text="No match for this filter"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="gone" />
 

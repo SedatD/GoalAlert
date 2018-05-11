@@ -1,4 +1,4 @@
-package vavien.agency.goalalert.pojoClasses;
+package vavien.agency.goalalert.model;
 
 import android.os.Parcel;
 
@@ -10,10 +10,10 @@ import android.os.Parcel;
 
 public class LiveScoresPojo implements android.os.Parcelable {
     private int leagueId, matchId, localScore, visitorScore, minute, preLocalScore, preVisitorScore, preMinute;
-    private String leagueName, localTeam, visitorTeam, flag;
+    private String leagueName, localTeam, visitorTeam, flag,events;
     private boolean ilkFlag, matchLenghtBool;
 
-    public LiveScoresPojo(int leagueId, String leagueName, int matchId, String localTeam, String visitorTeam, int localScore, int visitorScore, int minute, int preLocalScore, int preVisitorScore, int preMinute, String flag, boolean ilkFlag, boolean matchLenghtBool) {
+    public LiveScoresPojo(int leagueId, String leagueName, int matchId, String localTeam, String visitorTeam, int localScore, int visitorScore, int minute, int preLocalScore, int preVisitorScore, int preMinute, String flag, boolean ilkFlag, boolean matchLenghtBool, String events) {
         this.leagueId = leagueId;
         this.leagueName = leagueName;
         this.matchId = matchId;
@@ -28,6 +28,7 @@ public class LiveScoresPojo implements android.os.Parcelable {
         this.flag = flag;
         this.ilkFlag = ilkFlag;
         this.matchLenghtBool = matchLenghtBool;
+        this.events = events;
     }
 
     public LiveScoresPojo(int leagueId, String leagueName, String flag) {
@@ -44,6 +45,7 @@ public class LiveScoresPojo implements android.os.Parcelable {
         this.preMinute = -1;
         this.flag = flag;
         this.ilkFlag = false;
+        this.events = null;
     }
 
     protected LiveScoresPojo(Parcel in) {
@@ -54,6 +56,7 @@ public class LiveScoresPojo implements android.os.Parcelable {
         localScore = in.readInt();
         visitorScore = in.readInt();
         minute = in.readInt();
+        events = in.readString();
     }
 
     @Override
@@ -70,6 +73,7 @@ public class LiveScoresPojo implements android.os.Parcelable {
         dest.writeInt(localScore);
         dest.writeInt(visitorScore);
         dest.writeInt(minute);
+        dest.writeString(events);
     }
 
     public static final Creator<LiveScoresPojo> CREATOR = new Creator<LiveScoresPojo>() {
@@ -138,6 +142,10 @@ public class LiveScoresPojo implements android.os.Parcelable {
 
     public boolean isMatchLenghtBool() {
         return matchLenghtBool;
+    }
+
+    public String getEvents() {
+        return events;
     }
 
 }

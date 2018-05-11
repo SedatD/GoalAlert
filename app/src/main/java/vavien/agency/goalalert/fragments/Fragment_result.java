@@ -45,7 +45,7 @@ import java.util.Map;
 
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.ResultRecyclerViewAdapter;
-import vavien.agency.goalalert.pojoClasses.ResultPojo;
+import vavien.agency.goalalert.model.ResultPojo;
 
 /**
  * Created by albur on 6.10.2017.

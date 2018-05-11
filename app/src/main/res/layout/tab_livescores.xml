@@ -241,6 +241,19 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/textView_noFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="240dp"
+        android:gravity="center"
+        android:text="No match for this filter"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
     <RelativeLayout
         android:id="@+id/relative_search"
         android:layout_width="match_parent"
@@ -303,4 +316,5 @@
             android:visibility="invisible"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
     </RelativeLayout>
+
 </LinearLayout>

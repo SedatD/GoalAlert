@@ -72,4 +72,6 @@
     <string name="goal12">1-2 Gol</string>
     <string name="set_multi">Çoklu alarm kur</string>
     <string name="set_multi_long">Şu anda canlıda olan maçlara alarm kur</string>
+    <string name="ilk11">İlk On Bir</string>
+    <string name="yedekler">Yedekler</string>
 </resources>

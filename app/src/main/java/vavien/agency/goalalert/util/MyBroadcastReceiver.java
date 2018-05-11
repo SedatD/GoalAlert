@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.util;
 
 import android.app.ActivityManager;
 import android.content.Context;

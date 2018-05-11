@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +10,8 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.google.android.gms.ads.AdRequest;
+
+import vavien.agency.goalalert.R;
 
 public class SettingsActivity extends AppCompatActivity {
     private AudioManager audioManager;

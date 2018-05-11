@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import vavien.agency.goalalert.R;
-import vavien.agency.goalalert.pojoClasses.NextMatchPojo;
+import vavien.agency.goalalert.model.NextMatchPojo;
 
 /**
  * Created by SD on 9.11.2017.

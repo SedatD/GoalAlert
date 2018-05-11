@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import vavien.agency.goalalert.adapters.MatchDetailAdapter;
-import vavien.agency.goalalert.pojoClasses.MatchDetailPojo;
+import vavien.agency.goalalert.model.MatchDetailPojo;
 
 public class MatchDetailActivity extends AppCompatActivity {
 

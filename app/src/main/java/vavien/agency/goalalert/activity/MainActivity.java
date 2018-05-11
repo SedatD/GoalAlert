@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -34,6 +34,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import vavien.agency.goalalert.util.MyService;
+import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.PageAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -79,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         adViewAlt.loadAd(adRequest);
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8446699920682817/4254084799"); // orjinal
-        //mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
+        //mInterstitialAd.setAdUnitId("ca-app-pub-8446699920682817/4254084799"); // orjinal
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         if (!isNetworkStatusAvialable(getApplicationContext()))

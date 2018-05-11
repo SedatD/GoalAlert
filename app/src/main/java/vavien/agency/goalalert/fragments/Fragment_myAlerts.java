@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import vavien.agency.goalalert.DBHelper;
+import vavien.agency.goalalert.util.DBHelper;
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.AlarmListAdapter;
-import vavien.agency.goalalert.pojoClasses.AlertsPojo;
+import vavien.agency.goalalert.model.AlertsPojo;
 
 /**
  * Created by albur on 6.10.2017.

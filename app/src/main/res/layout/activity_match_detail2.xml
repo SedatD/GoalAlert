@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="vavien.agency.goalalert.MatchDetail.MatchDetailActivity2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/textView_leauge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="17sp"
+            tools:text="Premier Leauge" />
+
+        <ImageView
+            android:id="@+id/imageView_localTeam"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/linearLayout_middle"
+            android:layout_below="@+id/textView_leauge"
+            android:layout_marginLeft="32dp"
+            android:background="@drawable/decoded"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/textView_localTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView_localTeam"
+            android:layout_alignStart="@+id/imageView_localTeam"
+            android:layout_below="@+id/linearLayout_middle"
+            android:text="TextView"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_middle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/textView_leauge"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="80'"
+                android:textColor="#000"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="#000" />
+
+            <TextView
+                android:id="@+id/textView_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="2:0"
+                android:textColor="#000"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView_visitorTeam"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/linearLayout_middle"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textView_leauge"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/decoded"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/textView_visitorTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView_visitorTeam"
+            android:layout_alignStart="@+id/imageView_visitorTeam"
+            android:layout_below="@+id/linearLayout_middle"
+            android:text="TextView"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_referee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Referee : Collina"
+        android:textColor="#000"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/textView_venue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Stad : Vodafone Arena"
+        android:textColor="#000"
+        android:textSize="17sp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</LinearLayout>

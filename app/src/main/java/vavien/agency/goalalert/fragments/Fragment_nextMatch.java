@@ -47,7 +47,7 @@ import java.util.TimeZone;
 
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.NextMatchRecyclerViewAdapter;
-import vavien.agency.goalalert.pojoClasses.NextMatchPojo;
+import vavien.agency.goalalert.model.NextMatchPojo;
 
 /**
  * Created by albur on 16.10.2017.

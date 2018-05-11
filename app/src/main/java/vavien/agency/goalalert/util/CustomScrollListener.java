@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.util;
 
 import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;

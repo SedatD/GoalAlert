@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +15,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
+import vavien.agency.goalalert.R;
+
 public class SplashActivity extends AppCompatActivity {
     static InterstitialAd mInterstitialAd2;
 
@@ -28,8 +30,8 @@ public class SplashActivity extends AppCompatActivity {
         MobileAds.initialize(this, "ca-app-pub-8446699920682817~7829108542");
 
         mInterstitialAd2 = new InterstitialAd(this);
-        mInterstitialAd2.setAdUnitId("ca-app-pub-8446699920682817/8990625904"); // orjinal
-        //mInterstitialAd2.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
+        //mInterstitialAd2.setAdUnitId("ca-app-pub-8446699920682817/8990625904"); // orjinal
+        mInterstitialAd2.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
         mInterstitialAd2.loadAd(new AdRequest.Builder().build());
 
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

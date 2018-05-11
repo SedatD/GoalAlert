@@ -19,7 +19,6 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case 0:
                 Fragment_liveScores tab1 = new Fragment_liveScores();

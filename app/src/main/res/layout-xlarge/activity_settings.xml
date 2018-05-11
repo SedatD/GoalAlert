@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
-    tools:context="vavien.agency.goalalert.SettingsActivity">
+    tools:context="vavien.agency.goalalert.activity.SettingsActivity">
 
     <TextView
         android:id="@+id/textView"

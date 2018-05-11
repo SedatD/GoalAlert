@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/matchColor"
     android:fitsSystemWindows="true"
-    tools:context="vavien.agency.goalalert.MainActivity">
+    tools:context="vavien.agency.goalalert.activity.MainActivity">
 
 
     <android.support.design.widget.AppBarLayout

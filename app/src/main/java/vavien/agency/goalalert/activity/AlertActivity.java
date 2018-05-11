@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.activity;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -33,7 +33,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import vavien.agency.goalalert.pojoClasses.LiveScoresPojo;
+import vavien.agency.goalalert.util.DBHelper;
+import vavien.agency.goalalert.util.MyService;
+import vavien.agency.goalalert.R;
+import vavien.agency.goalalert.model.LiveScoresPojo;
 
 public class AlertActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int PERMISSION_REQUEST_CODE = 1;

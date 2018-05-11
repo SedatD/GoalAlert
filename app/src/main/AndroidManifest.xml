@@ -19,7 +19,7 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name=".AppController"
+        android:name=".util.AppController"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -27,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:clearTaskOnLaunch="true"
             android:fitsSystemWindows="true"
             android:label="@string/app_name"
@@ -35,11 +35,11 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".AlertActivity"
+            android:name=".activity.AlertActivity"
             android:screenOrientation="portrait" />
 
         <service
-            android:name=".MyService"
+            android:name=".util.MyService"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -49,7 +49,7 @@
         </service>
 
         <receiver
-            android:name=".MyBroadcastReceiver"
+            android:name=".util.MyBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped">
@@ -65,17 +65,21 @@
             android:value="398419ca71886f984c82275ed0a4bc820d8bb526" />
 
         <activity
-            android:name=".PresentActivity"
+            android:name=".activity.PresentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MatchDetailActivity"></activity>
+        <activity android:name=".MatchDetailActivity" />
+        <activity
+            android:name=".MatchDetail.MatchDetailActivity2"
+            android:label="@string/title_activity_match_detail2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

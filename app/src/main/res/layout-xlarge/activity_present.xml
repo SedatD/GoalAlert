@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
-    tools:context=".PresentActivity">
+    tools:context=".activity.PresentActivity">
 
     <ImageView
         android:id="@+id/img"

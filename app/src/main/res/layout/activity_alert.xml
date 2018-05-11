@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
-    tools:context="vavien.agency.goalalert.AlertActivity">
+    tools:context="vavien.agency.goalalert.activity.AlertActivity">
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adViewAlertAct"
@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-8446699920682817/1941700504" />
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
     <!-- test   ca-app-pub-3940256099942544/6300978111 -->
     <!-- orjinal   ca-app-pub-8446699920682817/1941700504 -->
 

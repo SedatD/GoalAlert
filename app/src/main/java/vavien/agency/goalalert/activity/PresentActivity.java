@@ -1,4 +1,4 @@
-package vavien.agency.goalalert;
+package vavien.agency.goalalert.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.google.android.gms.ads.AdRequest;
 
 import java.util.Locale;
 
-import static vavien.agency.goalalert.SplashActivity.mInterstitialAd2;
+import vavien.agency.goalalert.R;
 
 
 public class PresentActivity extends AppCompatActivity implements View.OnClickListener {
@@ -46,10 +46,10 @@ public class PresentActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        if (mInterstitialAd2 != null) {
-            if (mInterstitialAd2.isLoaded()) {
-                mInterstitialAd2.show();
-                mInterstitialAd2.setAdListener(new AdListener() {
+        if (SplashActivity.mInterstitialAd2 != null) {
+            if (SplashActivity.mInterstitialAd2.isLoaded()) {
+                SplashActivity.mInterstitialAd2.show();
+                SplashActivity.mInterstitialAd2.setAdListener(new AdListener() {
                     @Override
                     public void onAdClosed() {
                         startActivity(new Intent(PresentActivity.this, MainActivity.class));
@@ -60,7 +60,7 @@ public class PresentActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(PresentActivity.this, MainActivity.class));
                 finish();
             }
-            mInterstitialAd2.loadAd(new AdRequest.Builder().build());
+            SplashActivity.mInterstitialAd2.loadAd(new AdRequest.Builder().build());
         } else {
             startActivity(new Intent(PresentActivity.this, MainActivity.class));
             finish();

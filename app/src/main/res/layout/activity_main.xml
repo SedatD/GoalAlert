@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/matchColor"
     android:fitsSystemWindows="true"
-    tools:context="vavien.agency.goalalert.MainActivity">
+    tools:context="vavien.agency.goalalert.activity.MainActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -78,7 +78,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-8446699920682817/8923123392" />
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
     <!-- test   ca-app-pub-3940256099942544/6300978111 -->
     <!-- orjinal   ca-app-pub-8446699920682817/8923123392 -->
 

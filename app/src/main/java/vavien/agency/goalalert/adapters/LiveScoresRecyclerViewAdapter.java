@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import vavien.agency.goalalert.DBHelper;
+import vavien.agency.goalalert.util.DBHelper;
 import vavien.agency.goalalert.R;
-import vavien.agency.goalalert.pojoClasses.LiveScoresPojo;
+import vavien.agency.goalalert.model.LiveScoresPojo;
 
 /**
  * Created by SD on 30.10.2017.
