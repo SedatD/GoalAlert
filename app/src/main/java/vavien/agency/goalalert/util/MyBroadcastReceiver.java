@@ -17,7 +17,8 @@ public class MyBroadcastReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.wtf("MyBroadcastReceiver", " onReceive Broadcast");
-        if (!isMyServiceRunning(MyService.class, context)) {
+        DBHelper dbHelper = new DBHelper(context);
+        if (!isMyServiceRunning(MyService.class, context) && dbHelper.getAllCotacts().size() != 0) {
             Log.wtf("MyBroadcastReceiver", " onReceive Broadcast - servisi başlattı");
             context.startService(new Intent(context, MyService.class));
         }

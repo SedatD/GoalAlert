@@ -1,6 +1,7 @@
 package vavien.agency.goalalert.util;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -133,6 +134,8 @@ public class MyService extends Service {
                     Set<String> myMatchList = new HashSet<String>(arrMatchId);
                     editor.putStringSet("myMatchList", myMatchList);
                     editor.apply();
+                } else {
+                    stopTimerTask();
                 }
             }
         };
@@ -541,6 +544,12 @@ public class MyService extends Service {
             Log.wtf("MyService", "timer cancel / service kill");
             timer.cancel();
             timer = null;
+            timerTask.cancel();
+            stopSelf();
+            ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+            if (manager != null) {
+                manager.killBackgroundProcesses(getPackageName());
+            }
         }
     }
 

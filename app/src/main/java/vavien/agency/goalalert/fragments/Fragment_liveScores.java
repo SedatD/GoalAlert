@@ -50,13 +50,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import vavien.agency.goalalert.MatchDetail.MatchDetailActivity2;
+import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.activity.AlertActivity;
 import vavien.agency.goalalert.activity.MainActivity;
-import vavien.agency.goalalert.MatchDetail.MatchDetailActivity2;
-import vavien.agency.goalalert.util.MySingleton;
-import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.LiveScoresRecyclerViewAdapter;
 import vavien.agency.goalalert.model.LiveScoresPojo;
+import vavien.agency.goalalert.util.MySingleton;
 
 public class Fragment_liveScores extends Fragment implements View.OnClickListener {
     int[][][] matrix = new int[999][99][3];
@@ -365,9 +365,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -386,9 +386,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -407,9 +407,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -428,9 +428,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -449,9 +449,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -470,9 +470,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -491,9 +491,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -512,9 +512,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                                 isLeaugeFirst = false;
                                             }
                                             if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                             } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                             }
 
                                             matrix[i][j][0] = localScore;
@@ -532,9 +532,9 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                             isLeaugeFirst = false;
                                         }
                                         if (flag) {
-                                            obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool,events);
+                                            obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
                                         } else {
-                                            obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool,events);
+                                            obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
                                         }
 
                                         matrix[i][j][0] = localScore;
@@ -600,7 +600,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                                 //getActivity().finish();
                             }
                         } else if (v.getId() == R.id.btnStats) {
-                            getStats(aq.getLeagueId(), aq.getMatchId(),aq.getEvents());
+                            getStats(aq.getLeagueId(), aq.getMatchId(), aq.getEvents());
                             progressBar.setVisibility(View.VISIBLE);
                         }
                     }
@@ -872,8 +872,10 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
 
     private void getStats(int leaugeid, final int matchid, final String events) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        //StringRequest getRequest = new StringRequest(Request.Method.GET, "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/" + leaugeid + ".xml?json=1",
-        StringRequest getRequest = new StringRequest(Request.Method.GET, "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/1005.xml?json=1",
+        //String url = "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/" + leaugeid + ".xml?json=1";
+        String url = "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/1005.xml?json=1";
+        Log.wtf("liveScore", "url : " + url);
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(final String response) {
@@ -889,8 +891,8 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                             JSONArray jsonArray = tournament.getJSONArray("match");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                //if (matchid == jsonObject.getInt("@id"))
-                                match = jsonObject;
+                                if (matchid == jsonObject.getInt("@id"))
+                                    match = jsonObject;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
