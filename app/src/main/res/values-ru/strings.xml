@@ -72,4 +72,8 @@
     <string name="goal12">1-2 гол</string>
     <string name="set_multi">Установить мульти-уведомление</string>
     <string name="set_multi_long">Установить уведомление для матчей, идущих сейчас в прямом эфире</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="ilk11">Starting Eleven</string>
+    <string name="yedekler">Substitutes</string>
+    <string name="title_activity_match_detail2">MatchDetailActivity2</string>
 </resources>

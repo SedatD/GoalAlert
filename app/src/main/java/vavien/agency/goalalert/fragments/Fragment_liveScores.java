@@ -32,14 +32,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.onesignal.OneSignal;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,10 +50,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import vavien.agency.goalalert.MatchDetail.MatchDetailActivity2;
 import vavien.agency.goalalert.R;
-import vavien.agency.goalalert.activity.AlertActivity;
+import vavien.agency.goalalert.activity.Alert2Activity;
 import vavien.agency.goalalert.activity.MainActivity;
 import vavien.agency.goalalert.adapters.LiveScoresRecyclerViewAdapter;
 import vavien.agency.goalalert.model.LiveScoresPojo;
@@ -77,6 +80,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
     private int matchLenght = 0;
     private LiveScoresPojo aq;
     private ProgressBar progressBar;
+    private String device_id = "";
 
     public static void expand(final View v) {
         v.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -129,6 +133,8 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_livescores, container, false);
+
+        device_id = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
 
         rootview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -237,7 +243,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
         MainActivity.live = true;
         huntFilter = 0;
         huntFilterMin = 0;
-        getReqFuncJsnArr("http://opucukgonder.com/tipster/index.php/Service/lastLive");
+        getReqFuncJsnArr();
 
         mRecyclerView = rootview.findViewById(R.id.recyclerView_liveScores);
 
@@ -312,339 +318,347 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
         ctx = context;
     }
 
-    public void getReqFuncJsnArr(final String url) {
-        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(final JSONArray response) {
-                //Log.wtf("Response liveScores", response.toString());
-                progressBar.setVisibility(View.GONE);
-                jsonArray_lastLive = response;
-
-                if (jsonArray_lastLive.length() == 0) {
-                    txtNoLiveMatch.setVisibility(View.VISIBLE);
-                } else {
-                    txtNoLiveMatch.setVisibility(View.GONE);
-                }
-
-                if (matchLenght != 0)
-                    matchLenghtBool = matchLenght == jsonArray_lastLive.length();
-
-                matchLenght = jsonArray_lastLive.length();
-
-                results = new ArrayList<LiveScoresPojo>();
-                LiveScoresPojo obj;
-                try {
-                    for (int i = 0; i < jsonArray_lastLive.length(); i++) {
-                        JSONObject jsonObject = (JSONObject) jsonArray_lastLive.get(i);
-                        int leagueId = jsonObject.getInt("league_id");
-                        String leagueName = jsonObject.getString("league_name");
-                        String flags = jsonObject.getString("flags");
-                        JSONArray jsonArray = jsonObject.getJSONArray("match");
-
-                        obj = new LiveScoresPojo(leagueId, leagueName, flags);
-                        //results.add(obj);
-                        boolean isLeaugeFirst = true;
-
-                        for (int j = 0; j < jsonArray.length(); j++) {
-                            JSONObject jsonObject1 = (JSONObject) jsonArray.get(j);
-                            int matchId = jsonObject1.getInt("match_id");
-                            String localTeam = jsonObject1.getString("localteam");
-                            String visitorTeam = jsonObject1.getString("visitorteam");
-                            int localScore = jsonObject1.getInt("localScore");
-                            int visitorScore = jsonObject1.getInt("visitorScore");
-                            int minute = jsonObject1.getInt("minute");
-
-                            String events = jsonObject1.getString("events");
-
-                            switch (huntFilter) {
-                                case 1:
-                                    if (localScore == 0 && visitorScore == 0) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                case 2:
-                                    if (localScore == visitorScore && localScore > 0 && visitorScore > 0) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                case 3:
-                                    if ((localScore == 0 && visitorScore > 0) || (visitorScore == 0 && localScore > 0)) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                case 4:
-                                    if ((localScore + visitorScore) > 0 && (localScore + visitorScore) < 3) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                case 5:
-                                    if ((localScore + visitorScore) < 3) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                case 6:
-                                    if ((localScore + visitorScore) > 2) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                case 7:
-                                    if (localScore > visitorScore) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                case 8:
-                                    if (localScore < visitorScore) {
-                                        if (methodForHuntFilterMin(minute)) {
-                                            if (isLeaugeFirst) {
-                                                results.add(obj);
-                                                isLeaugeFirst = false;
-                                            }
-                                            if (flag) {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                            } else {
-                                                obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                            }
-
-                                            matrix[i][j][0] = localScore;
-                                            matrix[i][j][1] = visitorScore;
-                                            matrix[i][j][2] = minute;
-
-                                            results.add(obj);
-                                        }
-                                    }
-                                    break;
-                                default:
-                                    if (methodForHuntFilterMin(minute)) {
-                                        if (isLeaugeFirst) {
-                                            results.add(obj);
-                                            isLeaugeFirst = false;
-                                        }
-                                        if (flag) {
-                                            obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
-                                        } else {
-                                            obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
-                                        }
-
-                                        matrix[i][j][0] = localScore;
-                                        matrix[i][j][1] = visitorScore;
-                                        matrix[i][j][2] = minute;
-
-                                        results.add(obj);
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                    flag = false;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                if (results.size() == 0)
-                    textView_noFilter.setVisibility(View.VISIBLE);
-                else
-                    textView_noFilter.setVisibility(View.GONE);
-
-                Parcelable recyclerViewState = mRecyclerView.getLayoutManager().onSaveInstanceState();
-
-                if (edt_Search.getText().length() == 0)
-                    dummy = null;
-                if (dummy != null && dummy.size() != 0 || dummy != null && dummy.size() == 0 && edt_Search.getText().length() != 0)
-                    mAdapter = new LiveScoresRecyclerViewAdapter(getContext(), dummy);
-                else
-                    mAdapter = new LiveScoresRecyclerViewAdapter(getContext(), results);
-
-                mRecyclerView.setAdapter(mAdapter);
-
-                // tüm dataları yakıp söndürüyor
-                /*for (int i = 0; i <results.size(); i++) {
-                    mRecyclerView.getAdapter().notifyItemChanged(i);
-                }*/
-
-                mRecyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
-
-                ((LiveScoresRecyclerViewAdapter) mAdapter).setOnItemClickListener(new LiveScoresRecyclerViewAdapter.MyClickListener() {
+    private void getReqFuncJsnArr() {
+        //RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://opucukgonder.com/tipster/index.php/Service/lastLiveNew",
+                new Response.Listener<String>() {
                     @Override
-                    public void onItemClick(int position, View v) {
+                    public void onResponse(String response) {
+                        Log.wtf("Response liveScores", response);
+                        progressBar.setVisibility(View.GONE);
+                        JSONObject jsonObjectTemp = new JSONObject();
+                        JSONArray lives = new JSONArray();
+                        JSONArray sariCanlar = new JSONArray();
+                        try {
+                            jsonObjectTemp = new JSONObject(response);
+                            lives = jsonObjectTemp.getJSONArray("lives");
+                            sariCanlar = jsonObjectTemp.getJSONArray("sariCanlar");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                        if (edt_Search.getText().length() != 0)
-                            aq = (LiveScoresPojo) dummy.get(position);
+                        jsonArray_lastLive = lives;
+
+                        if (jsonArray_lastLive.length() == 0) {
+                            txtNoLiveMatch.setVisibility(View.VISIBLE);
+                        } else {
+                            txtNoLiveMatch.setVisibility(View.GONE);
+                        }
+
+                        if (matchLenght != 0)
+                            matchLenghtBool = matchLenght == jsonArray_lastLive.length();
+
+                        matchLenght = jsonArray_lastLive.length();
+
+                        results = new ArrayList<LiveScoresPojo>();
+                        LiveScoresPojo obj;
+                        try {
+                            for (int i = 0; i < jsonArray_lastLive.length(); i++) {
+                                JSONObject jsonObject = (JSONObject) jsonArray_lastLive.get(i);
+                                int leagueId = jsonObject.getInt("league_id");
+                                String leagueName = jsonObject.getString("league_name");
+                                String flags = jsonObject.getString("flags");
+                                JSONArray jsonArray = jsonObject.getJSONArray("match");
+
+                                obj = new LiveScoresPojo(leagueId, leagueName, flags);
+                                //results.add(obj);
+                                boolean isLeaugeFirst = true;
+
+                                for (int j = 0; j < jsonArray.length(); j++) {
+                                    JSONObject jsonObject1 = (JSONObject) jsonArray.get(j);
+                                    int matchId = jsonObject1.getInt("match_id");
+                                    String localTeam = jsonObject1.getString("localteam");
+                                    String visitorTeam = jsonObject1.getString("visitorteam");
+                                    int localScore = jsonObject1.getInt("localScore");
+                                    int visitorScore = jsonObject1.getInt("visitorScore");
+                                    int minute = jsonObject1.getInt("minute");
+
+                                    String events = jsonObject1.getString("events");
+
+                                    switch (huntFilter) {
+                                        case 1:
+                                            if (localScore == 0 && visitorScore == 0) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        case 2:
+                                            if (localScore == visitorScore && localScore > 0 && visitorScore > 0) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        case 3:
+                                            if ((localScore == 0 && visitorScore > 0) || (visitorScore == 0 && localScore > 0)) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        case 4:
+                                            if ((localScore + visitorScore) > 0 && (localScore + visitorScore) < 3) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        case 5:
+                                            if ((localScore + visitorScore) < 3) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        case 6:
+                                            if ((localScore + visitorScore) > 2) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        case 7:
+                                            if (localScore > visitorScore) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        case 8:
+                                            if (localScore < visitorScore) {
+                                                if (methodForHuntFilterMin(minute)) {
+                                                    if (isLeaugeFirst) {
+                                                        results.add(obj);
+                                                        isLeaugeFirst = false;
+                                                    }
+                                                    if (flag) {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                    } else {
+                                                        obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                    }
+
+                                                    matrix[i][j][0] = localScore;
+                                                    matrix[i][j][1] = visitorScore;
+                                                    matrix[i][j][2] = minute;
+
+                                                    results.add(obj);
+                                                }
+                                            }
+                                            break;
+                                        default:
+                                            if (methodForHuntFilterMin(minute)) {
+                                                if (isLeaugeFirst) {
+                                                    results.add(obj);
+                                                    isLeaugeFirst = false;
+                                                }
+                                                if (flag) {
+                                                    obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, -1, -1, -1, flags, flag, matchLenghtBool, events);
+                                                } else {
+                                                    obj = new LiveScoresPojo(leagueId, leagueName, matchId, localTeam, visitorTeam, localScore, visitorScore, minute, matrix[i][j][0], matrix[i][j][1], matrix[i][j][2], flags, flag, matchLenghtBool, events);
+                                                }
+
+                                                matrix[i][j][0] = localScore;
+                                                matrix[i][j][1] = visitorScore;
+                                                matrix[i][j][2] = minute;
+
+                                                results.add(obj);
+                                            }
+                                            break;
+                                    }
+                                }
+                            }
+                            flag = false;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (results.size() == 0)
+                            textView_noFilter.setVisibility(View.VISIBLE);
                         else
-                            aq = (LiveScoresPojo) results.get(position);
+                            textView_noFilter.setVisibility(View.GONE);
 
-                        if (v.getId() == R.id.btnAlert) {
-                            Log.wtf("liveScores", "getAct() : " + getActivity() + " / isAdded() : " + isAdded());
-                            if (isAdded() && ctx != null) {
-                                Intent intent = new Intent(ctx, AlertActivity.class); // java.lang.NullPointerException: Attempt to invoke virtual method 'android.content.Context android.support.v4.app.FragmentActivity.getApplicationContext()' on a null object reference
-                                intent.putExtra("isGeneric", false);
-                                intent.putExtra("local", aq.getLocalTeam());
-                                intent.putExtra("visitor", aq.getVisitorTeam());
-                                intent.putExtra("minute", aq.getMinute() + "");
-                                intent.putExtra("localScore", aq.getLocalScore() + "");
-                                intent.putExtra("visitorScore", aq.getVisitorScore() + "");
-                                intent.putExtra("matchId", aq.getMatchId() + "");
-                                //MainActivity.live = false;
-                                startActivity(intent);
-                                //getActivity().finish();
+                        Parcelable recyclerViewState = mRecyclerView.getLayoutManager().onSaveInstanceState();
+
+                        if (edt_Search.getText().length() == 0)
+                            dummy = null;
+                        if (dummy != null && dummy.size() != 0 || dummy != null && dummy.size() == 0 && edt_Search.getText().length() != 0)
+                            mAdapter = new LiveScoresRecyclerViewAdapter(getContext(), dummy, sariCanlar);
+                        else
+                            mAdapter = new LiveScoresRecyclerViewAdapter(getContext(), results, sariCanlar);
+
+                        mRecyclerView.setAdapter(mAdapter);
+
+                        mRecyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+
+                        ((LiveScoresRecyclerViewAdapter) mAdapter).setOnItemClickListener(new LiveScoresRecyclerViewAdapter.MyClickListener() {
+                            @Override
+                            public void onItemClick(int position, View v) {
+
+                                if (edt_Search.getText().length() != 0)
+                                    aq = (LiveScoresPojo) dummy.get(position);
+                                else
+                                    aq = (LiveScoresPojo) results.get(position);
+
+                                if (v.getId() == R.id.btnAlert) {
+                                    Log.wtf("liveScores", "getAct() : " + getActivity() + " / isAdded() : " + isAdded());
+                                    if (isAdded() && ctx != null) {
+                                        Intent intent = new Intent(ctx, Alert2Activity.class); // java.lang.NullPointerException: Attempt to invoke virtual method 'android.content.Context android.support.v4.app.FragmentActivity.getApplicationContext()' on a null object reference
+                                        intent.putExtra("isGeneric", false);
+                                        intent.putExtra("local", aq.getLocalTeam());
+                                        intent.putExtra("visitor", aq.getVisitorTeam());
+                                        intent.putExtra("minute", aq.getMinute() + "");
+                                        intent.putExtra("localScore", aq.getLocalScore() + "");
+                                        intent.putExtra("visitorScore", aq.getVisitorScore() + "");
+                                        intent.putExtra("matchId", aq.getMatchId() + "");
+                                        //MainActivity.live = false;
+                                        startActivity(intent);
+                                        //getActivity().finish();
+                                    }
+                                } else if (v.getId() == R.id.btnStats) {
+                                    getStats(aq.getLeagueId(), aq.getMatchId(), aq.getEvents());
+                                    progressBar.setVisibility(View.VISIBLE);
+                                }
                             }
-                        } else if (v.getId() == R.id.btnStats) {
-                            getStats(aq.getLeagueId(), aq.getMatchId(), aq.getEvents());
-                            progressBar.setVisibility(View.VISIBLE);
-                        }
+                        });
+
+                        if (MainActivity.live)
+                            getReqFuncJsnArr();
                     }
-                });
-
-                if (MainActivity.live)
-                    getReqFuncJsnArr(url);
-            }
-
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.wtf("Error.Response liveScores", error.toString());
-                if (MainActivity.live)
-                    getReqFuncJsnArr(url);
-                /*hidepDialog();
-                builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Server error, please try again").setCancelable(false).setPositiveButton("Refresh", new DialogInterface.OnClickListener() {
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        getReqFuncJsnArr(url);
-                        dialogInterface.cancel();
+                    public void onErrorResponse(VolleyError error) {
+                        Log.wtf("Error.Response liveScores", error.toString());
+                        if (MainActivity.live)
+                            getReqFuncJsnArr();
                     }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();*/
+                })
+
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return super.getHeaders();
             }
-        }
 
-        );
-
-        getRequest.setShouldCache(false);// no caching url...
-        getRequest.setRetryPolicy(
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("deviceid", OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId());
+                //Log.wtf("params", params + "");
+                return params;
+            }
+        };
+        postRequest.setShouldCache(false);// no caching url...
+        postRequest.setRetryPolicy(
                 new DefaultRetryPolicy(
-                        20000,//time to wait for it in this case 20s
+                        10000,//time to wait for it in this case 10s
                         20,//tryies in case of error
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
                 )
         );
-
-        getRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        //queue.add(getRequest);
-        MySingleton.getInstance(getContext()).addToRequestQueue(getRequest);
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //MySingleton.getInstance(ctx).addToRequestQueue(postRequest);
+        //queue.add(postRequest);
+        MySingleton.getInstance(getContext()).addToRequestQueue(postRequest);
     }
 
     private boolean methodForHuntFilterMin(int minute) {
@@ -729,7 +743,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                 break;
             case R.id.btnGeneric:
                 if (ctx != null && results != null) {
-                    Intent intent = new Intent(ctx, AlertActivity.class);
+                    Intent intent = new Intent(ctx, Alert2Activity.class);
                     intent.putExtra("isGeneric", true);
                     intent.putParcelableArrayListExtra("results", results);
                     startActivity(intent);

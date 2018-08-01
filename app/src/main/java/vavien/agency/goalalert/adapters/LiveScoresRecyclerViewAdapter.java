@@ -22,11 +22,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import vavien.agency.goalalert.util.DBHelper;
+import java.util.ArrayList;
+
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.model.LiveScoresPojo;
 
@@ -43,12 +44,13 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
     private ArrayList<LiveScoresPojo> orig;
     private Context context;
     private MediaPlayer mediaPlayer;
-    private DBHelper dbHelper;
+    private JSONArray sariCanlar;
 
 
-    public LiveScoresRecyclerViewAdapter(Context context, ArrayList<LiveScoresPojo> myDataset) {
+    public LiveScoresRecyclerViewAdapter(Context context, ArrayList<LiveScoresPojo> myDataset, JSONArray sariCanlar) {
         mDataset = myDataset;
         this.context = context;
+        this.sariCanlar = sariCanlar;
         //notifyDataSetChanged();//bunu açmak gerekiyor olabilir
         //notifyItemChanged();
     }
@@ -88,7 +90,16 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
             holder.btnStats.setVisibility(View.GONE);
             holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.denemelig));
         } else {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            for (int i = 0; i < sariCanlar.length(); i++) {
+                try {
+                    JSONObject jsonObject = sariCanlar.getJSONObject(i);
+                    if (Integer.parseInt(jsonObject.getString("match_id")) == mDataset.get(position).getMatchId())
+                        holder.btnAlert.setBackgroundResource(R.drawable.bellyellow);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             Set<String> myMatchList = preferences.getStringSet("myMatchList", null);
             if (myMatchList != null) {
                 List<String> list = new ArrayList<String>(myMatchList);
@@ -96,7 +107,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
                     if (Integer.parseInt(list.get(i)) == mDataset.get(position).getMatchId())
                         holder.btnAlert.setBackgroundResource(R.drawable.bellyellow);
                 }
-            }
+            }*/
 
             if (position % 2 == 0)
                 holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.kirlibeyaz));
@@ -113,6 +124,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
             else
                 holder.minute.setText(mDataset.get(position).getMinute() + "' ");
 
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             boolean booleanMessage = preferences.getBoolean("booleanMessage", true);
 
             if (booleanMessage && mDataset.get(position).getLocalScore() != 0 && mDataset.get(position).getPreLocalScore() != -1 && mDataset.get(position).getPreLocalScore() != mDataset.get(position).getLocalScore() && !mDataset.get(position).isIlkFlag() && mDataset.get(position).isMatchLenghtBool()) {
@@ -232,7 +244,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
         TextView leagueName, local, localScore, visitorScore, visitor, minute;
         RelativeLayout rlView;
         int leagueId, matchId;
-        ImageButton btnAlert,btnStats;
+        ImageButton btnAlert, btnStats;
         ImageView flag;
         TextView txtNoLiveMatch;
 

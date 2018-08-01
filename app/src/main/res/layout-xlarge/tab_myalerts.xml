@@ -1,39 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/loginbackground"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/textViewNoAlert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_alarm_setted"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:visibility="gone" />
-
-    <ListView
-        android:id="@+id/lw_alertTab"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/imageButton_reklam"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewNoAlert" />
-
-    <ImageButton
-        android:id="@+id/imageButton_reklam"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/betxscore2" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewNoAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_alarm_setted"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="37sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textViewPending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pending Alarms"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="31sp" />
+
+        <ListView
+            android:id="@+id/lw_alertTab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textViewCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Completed Alarms"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="31sp" />
+
+        <ListView
+            android:id="@+id/lw_alertTabCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/imageButton_reklam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/betxscore2" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

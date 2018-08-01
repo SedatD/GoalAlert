@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
-    tools:context="vavien.agency.goalalert.activity.AlertActivity">
+    tools:context="vavien.agency.goalalert.activity.Alert2Activity">
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adViewAlertAct"
@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-8446699920682817/1941700504" />
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
     <!-- test   ca-app-pub-3940256099942544/6300978111 -->
     <!-- orjinal   ca-app-pub-8446699920682817/1941700504 -->
 
@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/adViewAlertAct"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="140dp"
         android:text="Takım 1 vs Takım 2"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <Spinner
@@ -35,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_teams"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="70dp"
         android:background="@android:drawable/btn_dropdown"
         android:drawSelectorOnTop="true"
         android:spinnerMode="dropdown"
@@ -55,8 +55,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/your_alert"
+            android:layout_marginBottom="50dp"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/txt_yourAlertBet"
@@ -64,7 +65,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
     </LinearLayout>
 
     <FrameLayout
@@ -73,15 +74,14 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/date_timeTxt1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/r2">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_margin="50dp"
             android:orientation="vertical">
 
             <include
@@ -118,10 +118,11 @@
                 android:id="@+id/btn_setTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/login_button_shapes"
                 android:text="@string/set_alert"
                 android:textColor="@color/white"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -130,7 +131,7 @@
     <TextView
         android:id="@+id/date_timeTxt1"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/toolbar"
         android:gravity="center"

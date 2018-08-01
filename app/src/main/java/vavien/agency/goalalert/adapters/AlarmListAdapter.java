@@ -12,9 +12,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import vavien.agency.goalalert.util.DBHelper;
 import vavien.agency.goalalert.R;
-import vavien.agency.goalalert.model.AlertsPojo;
+import vavien.agency.goalalert.model.AlarmListPojo;
 
 import static vavien.agency.goalalert.R.id.textAlertList;
 
@@ -27,11 +26,12 @@ import static vavien.agency.goalalert.R.id.textAlertList;
 public class AlarmListAdapter extends BaseAdapter {
     private static onDoneClick mListener;
     private LayoutInflater mInflater;
-    private List<AlertsPojo> mAlarms;
+    private List<AlarmListPojo> mAlarms;
     private Context context;
-    private DBHelper mydb;
 
-    public AlarmListAdapter(Activity activity, List<AlertsPojo> alarms, onDoneClick listener) {
+    public AlarmListAdapter(Activity activity, List<AlarmListPojo> alarms, onDoneClick listener) {
+        if (activity == null)
+            return;
         mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mAlarms = alarms;
         context = activity;
@@ -59,16 +59,16 @@ public class AlarmListAdapter extends BaseAdapter {
         @SuppressLint({"ViewHolder", "InflateParams"}) final View viewRow = mInflater.inflate(R.layout.listview_fragment_alert_row, null);
         Holder holder = new Holder();
         holder.textAlertList = viewRow.findViewById(textAlertList);
-        holder.btnCancel =  viewRow.findViewById(R.id.btnCancelAlert);
+        holder.btnCancel = viewRow.findViewById(R.id.btnCancelAlert);
 
-        final AlertsPojo alert = mAlarms.get(position);
+        final AlarmListPojo alert = mAlarms.get(position);
 
-        holder.textAlertList.setText(alert.getMainText());
+        holder.textAlertList.setText(alert.getText());
 
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClick(v, position, alert.getDbId(), alert.getMatchId());
+                mListener.onClick(v, position, alert.getId());
             }
         });
 
@@ -76,11 +76,12 @@ public class AlarmListAdapter extends BaseAdapter {
     }
 
     public interface onDoneClick {
-        void onClick(View v, int position, int dbidd, String matchId);
+        void onClick(View v, int position, int id);
     }
 
     private class Holder {
         TextView textAlertList;
         ImageView btnCancel;
     }
+
 }

@@ -30,8 +30,8 @@ public class SplashActivity extends AppCompatActivity {
         MobileAds.initialize(this, "ca-app-pub-8446699920682817~7829108542");
 
         mInterstitialAd2 = new InterstitialAd(this);
-        //mInterstitialAd2.setAdUnitId("ca-app-pub-8446699920682817/8990625904"); // orjinal
-        mInterstitialAd2.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
+        mInterstitialAd2.setAdUnitId("ca-app-pub-8446699920682817/8990625904"); // orjinal
+        //mInterstitialAd2.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
         mInterstitialAd2.loadAd(new AdRequest.Builder().build());
 
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

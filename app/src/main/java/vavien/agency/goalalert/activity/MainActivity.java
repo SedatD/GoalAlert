@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import vavien.agency.goalalert.util.MyService;
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.PageAdapter;
 
@@ -44,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     //public static int huntFilter = 0;
     //public static int huntFilterMin = 0;
     static InterstitialAd mInterstitialAd;
-    private Intent mServiceIntent;
-    private MyService myService;
     private ViewPager viewPager;
     private PageAdapter adapter;
     private Uri imguri;
@@ -71,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
 
-        myService = new MyService(this);
-        mServiceIntent = new Intent(this, myService.getClass());
 
         //MobileAds.initialize(this, "ca-app-pub-8446699920682817~7829108542");
 
@@ -81,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
         adViewAlt.loadAd(adRequest);
 
         mInterstitialAd = new InterstitialAd(this);
-        //mInterstitialAd.setAdUnitId("ca-app-pub-8446699920682817/4254084799"); // orjinal
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
+        mInterstitialAd.setAdUnitId("ca-app-pub-8446699920682817/4254084799"); // orjinal
+        //mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712"); // test
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         if (!isNetworkStatusAvialable(getApplicationContext()))
@@ -288,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        stopService(mServiceIntent);
         super.onDestroy();
     }
 
