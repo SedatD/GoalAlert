@@ -18,7 +18,9 @@ import com.google.android.gms.ads.MobileAds;
 import vavien.agency.goalalert.R;
 
 public class SplashActivity extends AppCompatActivity {
+
     static InterstitialAd mInterstitialAd2;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (InterruptedException ex) {
                     Log.wtf("SplashAct", "catche düştü");
                 } finally {
-                    Intent intent;
+
                     if (myBoolean) {
                         intent = new Intent(getApplicationContext(), PresentActivity.class);
 
@@ -63,6 +65,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     startActivity(intent);
                     finish();
+
                 }
             }
         };
@@ -74,4 +77,5 @@ public class SplashActivity extends AppCompatActivity {
         anim.setDuration(time);
         viewToAnimate.startAnimation(anim);
     }
+
 }

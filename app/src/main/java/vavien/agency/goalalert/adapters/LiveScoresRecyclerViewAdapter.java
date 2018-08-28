@@ -22,10 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 import vavien.agency.goalalert.R;
@@ -44,20 +40,18 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
     private ArrayList<LiveScoresPojo> orig;
     private Context context;
     private MediaPlayer mediaPlayer;
-    private JSONArray sariCanlar;
 
 
-    public LiveScoresRecyclerViewAdapter(Context context, ArrayList<LiveScoresPojo> myDataset, JSONArray sariCanlar) {
+    public LiveScoresRecyclerViewAdapter(Context context, ArrayList<LiveScoresPojo> myDataset) {
         mDataset = myDataset;
         this.context = context;
-        this.sariCanlar = sariCanlar;
         //notifyDataSetChanged();//bunu açmak gerekiyor olabilir
         //notifyItemChanged();
     }
 
 
     public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
+        LiveScoresRecyclerViewAdapter.myClickListener = myClickListener;
     }
 
     @Override
@@ -90,7 +84,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
             holder.btnStats.setVisibility(View.GONE);
             holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.denemelig));
         } else {
-            for (int i = 0; i < sariCanlar.length(); i++) {
+            /*for (int i = 0; i < sariCanlar.length(); i++) {
                 try {
                     JSONObject jsonObject = sariCanlar.getJSONObject(i);
                     if (Integer.parseInt(jsonObject.getString("match_id")) == mDataset.get(position).getMatchId())
@@ -98,7 +92,8 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
+            }*/
+
             /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             Set<String> myMatchList = preferences.getStringSet("myMatchList", null);
             if (myMatchList != null) {
@@ -237,7 +232,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
     }
 
     public interface MyClickListener {
-        public void onItemClick(int position, View v);
+        void onItemClick(int position, View v);
     }
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -269,5 +264,7 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
         public void onClick(View v) {
             myClickListener.onItemClick(getPosition(), v);
         }
+
     }
+
 }

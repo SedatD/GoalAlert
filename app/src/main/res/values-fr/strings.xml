@@ -76,4 +76,6 @@
     <string name="ilk11">Starting Eleven</string>
     <string name="yedekler">Substitutes</string>
     <string name="title_activity_match_detail2">MatchDetailActivity2</string>
+    <string name="completed_alarms">Alarmes terminées</string>
+    <string name="pending_alarms">Alarmes en attente</string>
 </resources>

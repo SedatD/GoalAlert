@@ -1,7 +1,5 @@
 package vavien.agency.goalalert.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -41,9 +39,9 @@ import vavien.agency.goalalert.model.AlarmListPojo;
  * :)
  */
 
-public class Fragment_myAlerts extends Fragment implements View.OnClickListener {
+public class Fragment_myAlerts extends Fragment {
     //private TextView textViewNoAlert;
-    private ListView listView,lw_alertTabCompleted;
+    private ListView listView, lw_alertTabCompleted;
     private ProgressBar progressBar;
 
     @Override
@@ -56,14 +54,16 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
         progressBar = alertview.findViewById(R.id.progressBar);
         //progressBar.bringToFront();
         progressBar.setDrawingCacheBackgroundColor(getResources().getColor(R.color.denemetab));
-        alertview.findViewById(R.id.imageButton_reklam).setOnClickListener(this);
 
-        getAlarms("pending");
+        if (isAdded())
+            getAlarms("pending");
 
         return alertview;
     }
 
     private void getAlarms(final String status) {
+        if (getActivity().getApplicationContext() == null)
+            return;
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         StringRequest postRequest = new StringRequest(Request.Method.POST, "http://opucukgonder.com/tipster/index.php/Service/getAlarms",
                 new Response.Listener<String>() {
@@ -82,31 +82,54 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 jsonObject = jsonArray.getJSONObject(i);
-                                text = jsonObject.getString("localteam") + " - " + jsonObject.getString("visitorteam");
+
+                                if (!isAdded())
+                                    return;
+
+                                String aq = jsonObject.getString("bet_minute");
+                                if (aq.equals("-2"))
+                                    aq = getResources().getString(R.string.any_time);
+                                else
+                                    aq = aq + "'";
+
+                                String aq2 = jsonObject.getString("bet");
+                                if (aq2.equals("-9.9"))
+                                    aq2 = getResources().getString(R.string.no_goal);
+                                if (aq2.equals("-8.8"))
+                                    aq2 = getResources().getString(R.string.score);
+
+
+                                text = jsonObject.getString("localteam") + " - " + jsonObject.getString("visitorteam") + " / " + aq + " / " + aq2;
                                 alarms.add(new AlarmListPojo(jsonObject.getInt("id"), text));
                             }
 
                             /*if (alarms.size() == 0)
                                 textViewNoAlert.setVisibility(View.VISIBLE);*/
 
-                            AlarmListAdapter alarmListAdapter = new AlarmListAdapter(getActivity(), alarms, new AlarmListAdapter.onDoneClick() {
-                                @Override
-                                public void onClick(View v, int position, int id) {
-                                    deleteAlarms(id);
-                                    progressBar.setVisibility(View.VISIBLE);
-                                }
-                            });
+                            if (alarms.size() != 0) {
+                                listView.setVisibility(View.VISIBLE);
+                                AlarmListAdapter alarmListAdapter = new AlarmListAdapter(getActivity(), alarms, new AlarmListAdapter.onDoneClick() {
+                                    @Override
+                                    public void onClick(View v, int position, int id) {
+                                        deleteAlarms(id);
+                                        progressBar.setVisibility(View.VISIBLE);
+                                    }
+                                });
 
-                            alarmListAdapter.notifyDataSetChanged();
-                            listView.setAdapter(alarmListAdapter);
-
-                            getAlarmsCompleted("completed");
+                                alarmListAdapter.notifyDataSetChanged();
+                                listView.setAdapter(alarmListAdapter);
+                            } else {
+                                listView.setVisibility(View.INVISIBLE);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.wtf("Fragment_myAlerts getAlarms", "request catche girdi" + e);
                             Toast.makeText(getActivity(), getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         }
+                        if (!isAdded())
+                            return;
+                        getAlarmsCompleted("completed");
                     }
                 },
                 new Response.ErrorListener() {
@@ -143,6 +166,10 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
     }
 
     private void getAlarmsCompleted(final String status) {
+        if (!isAdded())
+            return;
+        if (getActivity().getApplicationContext() == null)
+            return;
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         StringRequest postRequest = new StringRequest(Request.Method.POST, "http://opucukgonder.com/tipster/index.php/Service/getAlarms",
                 new Response.Listener<String>() {
@@ -154,30 +181,52 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
                             progressBar.setVisibility(View.GONE);
 
                             List<AlarmListPojo> alarms = new ArrayList<>();
-                            String text = "";
+                            String text;
 
-                            JSONObject jsonObject = new JSONObject();
+                            JSONObject jsonObject;
                             JSONArray jsonArray = new JSONArray(response);
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 jsonObject = jsonArray.getJSONObject(i);
-                                text = jsonObject.getString("localteam") + " - " + jsonObject.getString("visitorteam");
+
+                                if (!isAdded())
+                                    return;
+
+                                String aq = jsonObject.getString("bet_minute");
+                                if (aq.equals("-2"))
+                                    aq = getResources().getString(R.string.any_time);
+                                else
+                                    aq = aq + "'";
+
+                                String aq2 = jsonObject.getString("bet");
+                                if (aq2.equals("-9.9"))
+                                    aq2 = getResources().getString(R.string.no_goal);
+                                if (aq2.equals("-8.8"))
+                                    aq2 = getResources().getString(R.string.score);
+
+                                text = jsonObject.getString("localteam") + " - " + jsonObject.getString("visitorteam") + " / " + aq + " / " + aq2;
                                 alarms.add(new AlarmListPojo(jsonObject.getInt("id"), text));
                             }
 
                             /*if (alarms.size() == 0)
                                 textViewNoAlert.setVisibility(View.VISIBLE);*/
 
-                            AlarmListAdapter alarmListAdapter = new AlarmListAdapter(getActivity(), alarms, new AlarmListAdapter.onDoneClick() {
-                                @Override
-                                public void onClick(View v, int position, int id) {
-                                    deleteAlarms(id);
-                                    progressBar.setVisibility(View.VISIBLE);
-                                }
-                            });
 
-                            alarmListAdapter.notifyDataSetChanged();
-                            lw_alertTabCompleted.setAdapter(alarmListAdapter);
+                            if (alarms.size() != 0) {
+                                lw_alertTabCompleted.setVisibility(View.VISIBLE);
+                                AlarmListAdapter alarmListAdapter = new AlarmListAdapter(getActivity(), alarms, new AlarmListAdapter.onDoneClick() {
+                                    @Override
+                                    public void onClick(View v, int position, int id) {
+                                        deleteAlarms(id);
+                                        progressBar.setVisibility(View.VISIBLE);
+                                    }
+                                });
+
+                                alarmListAdapter.notifyDataSetChanged();
+                                lw_alertTabCompleted.setAdapter(alarmListAdapter);
+                            } else {
+                                lw_alertTabCompleted.setVisibility(View.INVISIBLE);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -228,10 +277,10 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
                         Log.wtf("Fragment_myAlerts deleteAlarms response ", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.getBoolean("result"))
+                            if (jsonObject.getBoolean("result") && isAdded())
                                 getAlarms("pending");
                             //else
-                                //Toast.makeText(getActivity(), getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.wtf("Fragment_myAlerts deleteAlarms", "request catche girdi" + e);
@@ -270,19 +319,6 @@ public class Fragment_myAlerts extends Fragment implements View.OnClickListener 
         );
         postRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(postRequest);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.imageButton_reklam:
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "com.betxscore.betxscore")));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + "com.betxscore.betxscore")));
-                }
-                break;
-        }
     }
 
 }

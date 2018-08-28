@@ -196,10 +196,8 @@ public class Fragment_result extends Fragment implements View.OnClickListener {
     }
 
     private void postReqFuncStr() {
-        if (!isAdded()){
-            postReqFuncStr();
+        if (getContext() == null)
             return;
-        }
         RequestQueue queue = Volley.newRequestQueue(getContext());
         StringRequest getRequest = new StringRequest(Request.Method.POST, "http://opucukgonder.com/tipster/index.php/Service/previous_matches", new Response.Listener<String>() {
             @Override
@@ -318,4 +316,5 @@ public class Fragment_result extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
 }

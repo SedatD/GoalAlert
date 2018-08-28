@@ -30,7 +30,7 @@ public class AlarmListAdapter extends BaseAdapter {
     private Context context;
 
     public AlarmListAdapter(Activity activity, List<AlarmListPojo> alarms, onDoneClick listener) {
-        if (activity == null)
+        if (activity == null || alarms == null)
             return;
         mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mAlarms = alarms;

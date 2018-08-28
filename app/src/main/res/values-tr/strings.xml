@@ -76,4 +76,6 @@
     <string name="yedekler">Yedekler</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_match_detail2">MatchDetailActivity2</string>
+    <string name="completed_alarms">Gerçekleşen Alarmlar</string>
+    <string name="pending_alarms">Bekleyen Alarmlar</string>
 </resources>

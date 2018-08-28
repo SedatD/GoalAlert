@@ -106,4 +106,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="ilk11">Starting Eleven</string>
     <string name="yedekler">Substitutes</string>
+    <string name="completed_alarms">Completed Alarms</string>
+    <string name="pending_alarms">Pending Alarms</string>
 </resources>

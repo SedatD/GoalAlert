@@ -137,7 +137,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp">
 
             <Button
@@ -201,6 +200,7 @@
                 android:textColor="@color/white"
                 android:textSize="25sp" />
         </LinearLayout>
+
     </LinearLayout>
 
     <RelativeLayout
@@ -219,8 +219,8 @@
             android:id="@+id/recyclerView_liveScores"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
             android:clickable="true"
+            android:focusable="true"
             android:focusableInTouchMode="true"
             android:scrollbars="vertical" />
     </RelativeLayout>
@@ -309,4 +309,5 @@
             android:visibility="invisible"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
     </RelativeLayout>
+
 </LinearLayout>

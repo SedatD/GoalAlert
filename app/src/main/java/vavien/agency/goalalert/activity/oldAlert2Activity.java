@@ -42,7 +42,7 @@ import java.util.Map;
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.model.LiveScoresPojo;
 
-public class Alert2Activity extends AppCompatActivity implements View.OnClickListener {
+public class oldAlert2Activity extends AppCompatActivity implements View.OnClickListener {
     int spnPos = 0;
     private String local, visitor, matchId, minute, localScore, visitorScore;
     private Double bet = 0.0;
@@ -67,13 +67,13 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
 
         choose = getString(R.string.choose);
         String anytime = getString(R.string.any_time);
-        //String halftime = getString(R.string.half_time);
-        //String fulltime = getString(R.string.full_time);
+        String halftime = getString(R.string.half_time);
+        String fulltime = getString(R.string.full_time);
         String[] spinnerItems = new String[]{
                 choose,
                 anytime,
-                //halftime,
-                //fulltime,
+                halftime,
+                fulltime,
                 "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90"};
 
         Resources();
@@ -91,7 +91,7 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
                 spinnerItems = new String[]{
                         choose,
                         anytime,
-                        //halftime,
+                        halftime,
                         "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90"};
             } else {
                 local = extras.getString("local");
@@ -217,10 +217,10 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
 
     public void changeButtonColor() {
         btts_yes = (GradientDrawable) btn_btts_yes1.getBackground();
-        //btts_yes.setColor(ContextCompat.getColor(this, R.color.black));
+        btts_yes.setColor(ContextCompat.getColor(this, R.color.black));
 
         btts_no = (GradientDrawable) btn_btts_no1.getBackground();
-        //btts_no.setColor(ContextCompat.getColor(this, R.color.red));
+        btts_no.setColor(ContextCompat.getColor(this, R.color.red));
 
         if (!isGeneric) {
             btn_score = (GradientDrawable) btn_Score.getBackground();
@@ -240,13 +240,13 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
         btn25Color.setColor(ContextCompat.getColor(this, R.color.red));
 
         btn35Color = (GradientDrawable) btn_35.getBackground();
-        //btn35Color.setColor(ContextCompat.getColor(this, R.color.black));
+        btn35Color.setColor(ContextCompat.getColor(this, R.color.black));
 
         btn45Color = (GradientDrawable) btn_45.getBackground();
-        //btn45Color.setColor(ContextCompat.getColor(this, R.color.red));
+        btn45Color.setColor(ContextCompat.getColor(this, R.color.red));
 
         btn55Color = (GradientDrawable) btn_55.getBackground();
-        //btn55Color.setColor(ContextCompat.getColor(this, R.color.black));
+        btn55Color.setColor(ContextCompat.getColor(this, R.color.black));
 
         btne15Color = (GradientDrawable) btn_e15.getBackground();
         btne15Color.setColor(ContextCompat.getColor(this, R.color.red));
@@ -255,39 +255,39 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
         btne25Color.setColor(ContextCompat.getColor(this, R.color.black));
 
         btne35Color = (GradientDrawable) btn_e35.getBackground();
-        //btne35Color.setColor(ContextCompat.getColor(this, R.color.red));
+        btne35Color.setColor(ContextCompat.getColor(this, R.color.red));
 
         btne45Color = (GradientDrawable) btn_e45.getBackground();
-        //btne45Color.setColor(ContextCompat.getColor(this, R.color.black));
+        btne45Color.setColor(ContextCompat.getColor(this, R.color.black));
 
         btne55Color = (GradientDrawable) btn_e55.getBackground();
-        //btne55Color.setColor(ContextCompat.getColor(this, R.color.red));
+        btne55Color.setColor(ContextCompat.getColor(this, R.color.red));
 
         btnsetTimeColor = (GradientDrawable) btn_setTime.getBackground();
         btnsetTimeColor.setColor(ContextCompat.getColor(this, R.color.loginButton));
 
         btn_noGoal.setClickable(true);
-        //btn_btts_yes1.setClickable(true);
-        //btn_btts_no1.setClickable(true);
+        btn_btts_yes1.setClickable(true);
+        btn_btts_no1.setClickable(true);
         if (!isGeneric) {
             btn_Score.setClickable(true);
         }
         btn_05.setClickable(true);
         btn_15.setClickable(true);
         btn_25.setClickable(true);
-        //btn_35.setClickable(true);
-        //btn_45.setClickable(true);
-        //btn_55.setClickable(true);
+        btn_35.setClickable(true);
+        btn_45.setClickable(true);
+        btn_55.setClickable(true);
         btn_e15.setClickable(true);
         btn_e25.setClickable(true);
-        //btn_e35.setClickable(true);
-        //btn_e45.setClickable(true);
-        //btn_e55.setClickable(true);
+        btn_e35.setClickable(true);
+        btn_e45.setClickable(true);
+        btn_e55.setClickable(true);
     }
 
     public void changeButtonColorForAnyTime() {
-        //btts_yes.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
-        //btn_btts_yes1.setClickable(true);
+        btts_yes.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        btn_btts_yes1.setClickable(true);
 
         btn05Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
         btn_05.setClickable(true);
@@ -298,14 +298,14 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
         btn25Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
         btn_25.setClickable(true);
 
-        /*btn35Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        btn35Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
         btn_35.setClickable(true);
 
         btn45Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
         btn_45.setClickable(true);
 
         btn55Color.setColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
-        btn_55.setClickable(true);*/
+        btn_55.setClickable(true);
 
         btnsetTimeColor.setColor(ContextCompat.getColor(getApplicationContext(), R.color.set_time));
         btn_setTime.setClickable(true);
@@ -742,7 +742,7 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
                                 newMethodPostMultiple(multipleLspArray, spnPos, langDef);
                             }
                         } else {
-                            Toast.makeText(Alert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(oldAlert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         String langDef = "en";
@@ -767,12 +767,12 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
                     boolean isSuccess = jsonObject.getBoolean("result");
                     Log.wtf("Alert2 newMethodPost isSuccess : ", isSuccess + "");
                     if (isSuccess)
-                        startActivity(new Intent(Alert2Activity.this, MainActivity.class));
+                        startActivity(new Intent(oldAlert2Activity.this, MainActivity.class));
                     else
-                        Toast.makeText(Alert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(oldAlert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(Alert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(oldAlert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                     Log.wtf("Alert2 newMethodPost", "request catche girdi" + e);
                 }
             }
@@ -780,7 +780,7 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.wtf("Error.Response Alert2 newMethodPost", error.toString());
-                Toast.makeText(Alert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                Toast.makeText(oldAlert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
             }
         })
 
@@ -856,13 +856,13 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
                             JSONObject jsonObject = new JSONObject(response);
                             boolean isSuccess = jsonObject.getBoolean("result");
                             if (isSuccess)
-                                startActivity(new Intent(Alert2Activity.this, MainActivity.class));
+                                startActivity(new Intent(oldAlert2Activity.this, MainActivity.class));
                             else
-                                Toast.makeText(Alert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(oldAlert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.wtf("Alert2 newMethodPostMultiple", "request catche girdi" + e);
-                            Toast.makeText(Alert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(oldAlert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -870,7 +870,7 @@ public class Alert2Activity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.wtf("Error.Response Alert2 newMethodPostMultiple", error.toString());
-                        Toast.makeText(Alert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(oldAlert2Activity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

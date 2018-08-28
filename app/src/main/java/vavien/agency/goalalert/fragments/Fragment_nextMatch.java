@@ -56,7 +56,6 @@ import vavien.agency.goalalert.model.NextMatchPojo;
  */
 
 public class Fragment_nextMatch extends Fragment implements View.OnClickListener {
-    private RequestQueue queue;
     private JSONArray jsonArray_nextMatch;
     private ArrayList results = null;
     private DateFormat dateFormat;
@@ -187,7 +186,6 @@ public class Fragment_nextMatch extends Fragment implements View.OnClickListener
             }
         });
 
-        queue = Volley.newRequestQueue(getContext());
         postReqFuncStr();
 
         return rootview;
@@ -199,6 +197,9 @@ public class Fragment_nextMatch extends Fragment implements View.OnClickListener
     }
 
     private void postReqFuncStr() {
+        if (getContext() == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(getContext());
         StringRequest getRequest = new StringRequest(Request.Method.POST, "http://opucukgonder.com/tipster/index.php/Service/next_matches", new Response.Listener<String>() {
             @Override
             public void onResponse(final String response) {

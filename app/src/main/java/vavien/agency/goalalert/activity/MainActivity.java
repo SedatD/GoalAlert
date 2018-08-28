@@ -5,14 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -28,16 +24,16 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.onesignal.OneSignal;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import vavien.agency.goalalert.R;
 import vavien.agency.goalalert.adapters.PageAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
     private static final int PERMISSION_REQUEST_CODE = 1;
     public static boolean live = false;
     //public static int huntFilter = 0;
@@ -46,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private PageAdapter adapter;
     private Uri imguri;
+
+    private RewardedVideoAd mRewardedVideoAd;
 
     public static boolean isNetworkStatusAvialable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -63,13 +61,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Use an activity context to get the rewarded video instance.
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        mRewardedVideoAd.loadAd("ca-app-pub-8446699920682817/2092435167", new AdRequest.Builder().build());
+
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
-
-
-        //MobileAds.initialize(this, "ca-app-pub-8446699920682817~7829108542");
 
         AdView adViewAlt = findViewById(R.id.adViewAlt);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.action_share) {
+        /*if (id == R.id.action_share) {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.stor);
             String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
             File file = new File(extStorageDirectory, "GoalAlert.png");
@@ -194,25 +194,6 @@ public class MainActivity extends AppCompatActivity {
             }
             imguri = Uri.fromFile(file);
 
-            /*Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-            whatsappIntent.setType("text/plain");
-            whatsappIntent.putExtra(Intent.EXTRA_SUBJECT, "Goal Alert");
-            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Goal Alert\n\nFor Android\nhttps://play.google.com/store/apps/details?id=vavien.agency.goalalert\n\nFor IOS\nComing Soon");
-
-            //whatsappIntent.setType("text/html");
-            //whatsappIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<h3>Goal Alert</h3><br /><p>https://play.google.com/store/apps/details?id=vavienagency.com.tipster</p>"));
-
-            whatsappIntent.setType("image/*");
-            whatsappIntent.putExtra(Intent.EXTRA_STREAM, imguri);
-            whatsappIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            whatsappIntent.setPackage("com.whatsapp");
-            try {
-                this.startActivity(whatsappIntent);
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(this, R.string.not_whatsap, Toast.LENGTH_SHORT).show();
-            }*/
-
-            /////
             if (Build.VERSION.SDK_INT >= 23) {
                 if (checkPermission()) {
                     Intent share = new Intent(Intent.ACTION_SEND);
@@ -230,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 requestPermission();
             }
             return true;
-        }
+        }*/
 
         if (id == R.id.action_tutorials) {
             Intent intent = new Intent(this, PresentActivity.class);
@@ -282,12 +263,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onResume() {
+        mRewardedVideoAd.resume(this);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        mRewardedVideoAd.pause(this);
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mRewardedVideoAd.destroy(this);
         super.onDestroy();
     }
 
     public void forceCrash(View view) {
         throw new RuntimeException("This is a crash");
+    }
+
+    @Override
+    public void onRewardedVideoAdLoaded() {
+        mRewardedVideoAd.show();
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
+
+    }
+
+    @Override
+    public void onRewardedVideoStarted() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+
+    }
+
+    @Override
+    public void onRewarded(RewardItem rewardItem) {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int i) {
+        //mRewardedVideoAd.loadAd("ca-app-pub-8446699920682817/2092435167", new AdRequest.Builder().build());
+    }
+
+    @Override
+    public void onRewardedVideoCompleted() {
+
     }
 
 }
