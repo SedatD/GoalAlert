@@ -1229,8 +1229,8 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
 
     private void getStats(int leaugeid, final int matchid, final String events) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        //String url = "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/" + leaugeid + ".xml?json=1";
-        String url = "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/1005.xml?json=1";
+        String url = "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/" + leaugeid + ".xml?json=1";
+        //String url = "http://www.goalserve.com/getfeed/743d582d10924b1aadb0279a5e407519/commentaries/1005.xml?json=1";
         Log.wtf("liveScore", "url : " + url);
         StringRequest getRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
