@@ -58,7 +58,8 @@ public class NextMatchRecyclerViewAdapter extends RecyclerView.Adapter<NextMatch
             else
                 holder.flag.setBackgroundResource(resID);
 
-            holder.lView.setBackgroundColor(ContextCompat.getColor(context,R.color.denemelig));
+            //holder.lView.setBackgroundColor(ContextCompat.getColor(context,R.color.denemelig));
+            holder.lView.setBackgroundColor(ContextCompat.getColor(context, R.color.yeniSari));
         } else {
             holder.leagueName.setText(null);
             holder.flag.setVisibility(View.GONE);

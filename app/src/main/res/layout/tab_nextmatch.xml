@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_gravity="bottom"
-        android:background="@color/toolbar">
+        android:background="@color/yeniMavi">
 
         <ImageView
             android:id="@+id/prev"
@@ -51,7 +51,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@color/toolbar"
+            android:background="@color/yeniMavi"
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -76,7 +76,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@color/tablayout"
+            android:background="@color/yeniMavi"
             android:gravity="bottom"
             android:hint="@string/search"
             android:imeOptions="actionSearch"

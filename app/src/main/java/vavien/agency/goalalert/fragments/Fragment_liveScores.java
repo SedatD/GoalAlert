@@ -1172,7 +1172,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                     gradBtn = (GradientDrawable) btnHuntAwayWin.getBackground();
                     break;
             }
-            gradBtn.setColor(getResources().getColor(R.color.denemetab));
+            gradBtn.setColor(getResources().getColor(R.color.yeniYesil));
 
         }
     }
@@ -1213,7 +1213,7 @@ public class Fragment_liveScores extends Fragment implements View.OnClickListene
                     gradBtn = (GradientDrawable) btnHunt6090.getBackground();
                     break;
             }
-            gradBtn.setColor(getResources().getColor(R.color.denemetab));
+            gradBtn.setColor(getResources().getColor(R.color.yeniMavi));
         }
     }
 

@@ -97,7 +97,10 @@ public class Fragment_myAlerts extends Fragment {
                                     aq2 = getResources().getString(R.string.no_goal);
                                 if (aq2.equals("-8.8"))
                                     aq2 = getResources().getString(R.string.score);
-
+                                if (aq2.equals("1.1"))
+                                    aq2 = getResources().getString(R.string.btts_yes);
+                                if (aq2.equals("-1.1"))
+                                    aq2 = getResources().getString(R.string.btts_no);
 
                                 text = jsonObject.getString("localteam") + " - " + jsonObject.getString("visitorteam") + " / " + aq + " / " + aq2;
                                 alarms.add(new AlarmListPojo(jsonObject.getInt("id"), text));

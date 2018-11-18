@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#37bf1c</color>
     <color name="loginButton">#26C485</color>
-    <color name="red">#B02F2F</color>
+    <!--<color name="red">#B02F2F</color>-->
+    <color name="red">#a51414</color>
     <color name="signupButton">#BFCD48</color>
     <color name="white">#FFFF</color>
     <color name="black">#000000</color>
@@ -14,7 +15,8 @@
     <color name="toolbar1">#00192A</color>
     <color name="listitembackground">#539C67</color>
     <color name="set_time">#27CD32</color>
-    <color name="kirlibeyaz">#F6F6F6</color>
+    <color name="kirlibeyaz">#ececec</color>
+    <!--<color name="kirlibeyaz">#F6F6F6</color>-->
 
     <color name="year">#999999</color>
     <color name="title">#222222</color>
@@ -22,10 +24,11 @@
     <color name="leagueColor">#FBBA42</color>
     <color name="matchColor">#E9E9E9</color>
 
-
     <color name="denemeligtext">#E3E9F6</color>
     <color name="denemelig">#192A50</color>
     <color name="denemetab">#3E7ACA</color>
 
-    <color name="kirliBeyaz">#FFCCCCCC</color>
+    <color name="yeniMavi">#0f8fc0</color>
+    <color name="yeniSari">#f8cc21</color>
+    <color name="yeniYesil">#8ac141</color>
 </resources>

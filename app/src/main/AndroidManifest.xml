@@ -81,7 +81,7 @@
             android:name=".MatchDetail.MatchDetailActivity2"
             android:label="@string/title_activity_match_detail2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.Alert2Activity"></activity>
+        <activity android:name=".activity.Alert2Activity" />
     </application>
 
 </manifest>

@@ -82,7 +82,9 @@ public class LiveScoresRecyclerViewAdapter extends RecyclerView.Adapter<LiveScor
 
             holder.btnAlert.setVisibility(View.GONE);
             holder.btnStats.setVisibility(View.GONE);
-            holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.denemelig));
+            holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.yeniSari));
+            //holder.rlView.setBackgroundColor(ContextCompat.getColor(context, R.color.yeniSari));
+
         } else {
             /*for (int i = 0; i < sariCanlar.length(); i++) {
                 try {

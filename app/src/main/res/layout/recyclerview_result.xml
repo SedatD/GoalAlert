@@ -27,7 +27,7 @@
         android:layout_toEndOf="@+id/flag"
         android:layout_toRightOf="@+id/flag"
         android:gravity="center"
-        android:textColor="@color/denemeligtext"
+        android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="italic" />
 
@@ -35,12 +35,11 @@
         android:id="@+id/local"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
         android:layout_toLeftOf="@+id/localScore"
         android:gravity="center"
-        android:layout_marginLeft="5dp"
         android:maxLines="1"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/localScore"
@@ -58,7 +57,6 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:gravity="center"
-
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
@@ -71,7 +69,6 @@
         android:layout_toRightOf="@+id/visitorScore"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/black" />
 
 </RelativeLayout>

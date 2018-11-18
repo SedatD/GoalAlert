@@ -21,7 +21,7 @@
         android:gravity="center"
         android:text="@string/no_match_result"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:visibility="gone" />
 
@@ -29,16 +29,17 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
-        android:background="@color/toolbar">
+        android:background="@color/yeniMavi">
 
         <ImageView
             android:id="@+id/prev"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/date_timeTxt"
+
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
@@ -50,16 +51,16 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:background="@color/toolbar"
+            android:background="@color/yeniMavi"
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="26sp" />
 
         <ImageView
             android:id="@+id/searchCancelButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
@@ -75,7 +76,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:background="@color/tablayout"
+            android:background="@color/yeniMavi"
             android:gravity="bottom"
             android:hint="@string/search"
             android:imeOptions="actionSearch"
@@ -84,15 +85,15 @@
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="26sp"
             android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/searchButton"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginRight="80dp"
+            android:layout_marginEnd="82dp"
+            android:layout_marginRight="82dp"
             android:layout_toLeftOf="@+id/next"
             android:layout_toStartOf="@+id/next"
             android:clickable="true"
@@ -102,8 +103,8 @@
 
         <ImageView
             android:id="@+id/next"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

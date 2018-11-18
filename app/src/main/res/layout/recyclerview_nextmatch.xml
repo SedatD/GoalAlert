@@ -10,38 +10,38 @@
         android:id="@+id/flag"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:background="@mipmap/unknown"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:background="@mipmap/unknown"
         android:gravity="center" />
 
     <TextView
         android:id="@+id/leagueName"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/flag"
         android:layout_toRightOf="@+id/flag"
-        android:layout_marginLeft="10dp"
         android:gravity="center"
-        android:text="League"
-        android:textColor="@color/denemeligtext"
-        android:textSize="14sp"
         android:maxLines="1"
+        android:text="League"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         android:textStyle="italic" />
 
     <TextView
         android:id="@+id/startTime"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_toRightOf="@id/leagueName"
-        android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"
-        android:text="Time"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/leagueName"
+        android:gravity="center"
+        android:text="Time"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
@@ -50,20 +50,19 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/startTime"
         android:gravity="center"
         android:text="Local"
-        android:layout_toRightOf="@id/startTime"
         android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/visitor"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_toRightOf="@id/local"
-        android:text="Visitor"
+        android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/black"
-        />
+        android:text="Visitor"
+        android:textColor="@color/black" />
 
 </RelativeLayout>

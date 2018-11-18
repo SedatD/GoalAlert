@@ -23,11 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/adViewAlertAct"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="64dp"
         android:text="Takım 1 vs Takım 2"
         android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textSize="27sp" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -35,107 +34,118 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_teams"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginTop="64dp"
         android:background="@android:drawable/btn_dropdown"
         android:drawSelectorOnTop="true"
         android:spinnerMode="dropdown"
         android:textAlignment="center" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp">
-
-        <TextView
-            android:id="@+id/txt_yourAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_alert"
-            android:layout_marginBottom="50dp"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/txt_yourAlertBet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-    </LinearLayout>
-
     <FrameLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/date_timeTxt1"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinner"
         android:layout_marginBottom="60dp"
-        android:background="@drawable/r2">
+        android:layout_marginTop="64dp"
+        android:background="@drawable/r3">
 
         <LinearLayout
+            android:id="@+id/textLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="50dp"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="64dp">
+
+            <TextView
+                android:id="@+id/txt_yourAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_alert"
+                android:textColor="@color/white"
+                android:textSize="29sp" />
+
+            <TextView
+                android:id="@+id/txt_yourAlertBet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="28sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="144dp"
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
 
             <include
                 android:id="@+id/include_5"
                 layout="@layout/layout_alerts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <include
                 android:id="@+id/include_1"
                 layout="@layout/layout_alerts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <include
                 android:id="@+id/include_2"
                 layout="@layout/layout_alerts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <include
                 android:id="@+id/include_3"
                 layout="@layout/layout_alerts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <include
                 android:id="@+id/include_4"
                 layout="@layout/layout_alerts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/btn_setTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
                 android:background="@drawable/login_button_shapes"
                 android:text="@string/set_alert"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="27sp"
                 android:textStyle="bold" />
-
         </LinearLayout>
+
     </FrameLayout>
 
     <TextView
         android:id="@+id/date_timeTxt1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/toolbar"
+        android:background="@color/yeniMavi"
         android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="27sp" />
+
 </RelativeLayout>
