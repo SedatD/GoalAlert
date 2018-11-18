@@ -30,8 +30,8 @@ android {
                                 onesignal_google_project_number: "REMOTE"]
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 14
-        versionName "1.14"
+        versionCode 15
+        versionName "1.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
